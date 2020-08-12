@@ -1,0 +1,43 @@
+html {
+  --columns: 10;
+  --rows: 20;
+  --block-width: 30px;
+  --border-width: 1px;
+}
+
+body {
+  background-color: black;
+  color: white;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+h1 {
+  font-size: 3em;
+  margin: 1em;
+}
+
+h3 {
+  font-size: 1.2em;
+  margin: 1em;
+}
+
+.grid {
+  margin: 1em;
+  width: calc(var(--columns) * var(--block-width));
+  height: calc(var(--rows) * var(--block-width));
+  border: 1px solid red;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: content-box;
+}
+
+.playgroundBlock {
+  width: var(--block-width);
+  height: var(--block-width);
+  border: var(--border-width) solid gray;
+  background-color: yellowgreen;
+}
