@@ -25,6 +25,10 @@ h3 {
   margin: 1em;
 }
 
+button {
+  margin-top: 1em;
+}
+
 .grid {
   margin: 1em;
   width: calc(var(--columns) * var(--block-width));
@@ -33,6 +37,7 @@ h3 {
   display: flex;
   flex-wrap: wrap;
   box-sizing: content-box;
+  flex-shrink: 0;
 }
 
 .playgroundBlock {
@@ -40,4 +45,58 @@ h3 {
   height: var(--block-width);
   border: var(--border-width) solid gray;
   background-color: yellowgreen;
+}
+
+#configPanel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: grey;
+  text-align: center;
+}
+
+#configPanel label {
+  padding: 0.4em;
+  text-align: center;
+}
+
+#configPanel input {
+  padding: 0.4em;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+}
+
+#configPanel h3 {
+  background-color: black;
+  border-bottom: 4px solid salmon;
+  margin: 0;
+  padding: 1em;
+  width: 100%;
+}
+
+.mainContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.playgroundContainer {
+  min-width: 60%;
+  min-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  border: 1px solid gray;
+  flex-shrink: 0;
+}
+
+.sidePanel {
+  padding: 1em;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
 }

@@ -10,8 +10,21 @@
   </head>
   <body>
     <h1>Tetris</h1>
-    <h3>Score: <span id="score">0</span></h3>
-    <button id="startButton">Start Game</button>
-    <div id="playground" class="grid"></div>
+    <div class="mainContainer">
+      <div class="playgroundContainer"><div id="playground" class="grid"></div></div>
+      <div class="sidePanel">
+        <div id="configPanel">
+          <h3>Configuration</h3>
+          <label for="rows">rows</label>
+          <input id="rowNumber" type="number" name="rows" value="0" />
+          <label for="columns">columns</label>
+          <input id="columnNumber" type="number" name="columns" value="0" />
+          <label for="blockSize">block size (px)</label>
+          <input id="blockSize" type="number" name="blockSize" value="0" />
+        </div>
+        <button id="startButton">Start Game</button>
+        <h3>Score: <span id="score">0</span></h3>
+      </div>
+    </div>
   </body>
 </html>
