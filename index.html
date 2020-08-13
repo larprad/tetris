@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <script src="./app.js" defer></script>
-    <link rel="stylesheet" href="./reset.css" />
-    <link rel="stylesheet" href="./style.css" />
+    <script type="module" src="./app.js" defer></script>
+    <link rel="stylesheet" href="./styles/reset.css" />
+    <link rel="stylesheet" href="./styles/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tetris</title>
   </head>
@@ -21,8 +21,11 @@
           <input id="columnNumber" type="number" name="columns" value="0" />
           <label for="blockSize">block size (px)</label>
           <input id="blockSize" type="number" name="blockSize" value="0" />
+          <label for="blockSpeed">block speed</label>
+          <input id="blockSpeed" type="number" name="blockSpeed" value="0" min="0" max="15" />
         </div>
         <button id="startButton">Start Game</button>
+        <button id="resetButton">Reset Game</button>
         <h3>Score: <span id="score">0</span></h3>
       </div>
     </div>

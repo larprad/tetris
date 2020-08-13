@@ -33,7 +33,7 @@ button {
   margin: 1em;
   width: calc(var(--columns) * var(--block-width));
   height: calc(var(--rows) * var(--block-width));
-  border: 1px solid red;
+  border: 3px solid white;
   display: flex;
   flex-wrap: wrap;
   box-sizing: content-box;
@@ -47,13 +47,17 @@ button {
   background-color: yellowgreen;
 }
 
+.playgroundBottom {
+  width: var(--block-width);
+}
+
 #configPanel {
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-direction: column;
   background-color: grey;
   text-align: center;
+  width: 200px;
 }
 
 #configPanel label {
@@ -69,8 +73,7 @@ button {
 }
 
 #configPanel h3 {
-  background-color: black;
-  border-bottom: 4px solid salmon;
+  background-color: salmon;
   margin: 0;
   padding: 1em;
   width: 100%;
@@ -99,4 +102,8 @@ button {
   justify-content: start;
   align-items: center;
   flex-direction: column;
+}
+
+.tetromino {
+  background-color: salmon;
 }
