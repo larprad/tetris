@@ -2,20 +2,27 @@
 //------------ TETRIS ------------//
 //--------------------------------//
 
+//---------------------------------------------------------
+
 import createTetrominoes from './modules/tetrominoes';
+
+/////////////////
+// GLOBAL VARS //
+/////////////////
 
 let blockSize = 30;
 let rows = 20;
 let columns = 12;
 let speed = 500;
 let gameStatut = 'notStarted';
+let gameScore = 0;
 
 let timerId;
 let blocks;
 let currentPosition;
-let randomTetrominoIndex;
-let RotationIndex;
+let rotationIndex;
 let currentTetromino;
+let tetrominoNumber;
 let theTetrominoes;
 
 //---------------------------------------------------------
@@ -37,6 +44,8 @@ enableConfigurationPanel(true);
 function startGame() {
   if (gameStatut === 'notStarted') {
     console.log('new game is starting');
+    gameScore = 0;
+    score(0);
     initTetromino();
     enableConfigurationPanel(false);
     draw();
@@ -64,8 +73,16 @@ function reset() {
   pauseGame();
   gameStatut = 'notStarted';
   enableConfigurationPanel(true);
+  gameScore = 0;
+  score(0);
   document.getElementById('startButton').innerHTML = 'Start Game';
   console.log('game have been reseted');
+}
+
+function score(lines) {
+  const addedScore = lines * lines * 10;
+  gameScore += addedScore;
+  document.getElementById('score').innerHTML = gameScore;
 }
 
 //---------------------------------------------------------
@@ -76,35 +93,125 @@ function reset() {
 
 // init Tetromino
 function initTetromino() {
-  theTetrominoes = createTetrominoes(columns);
+  console.log('init new tetromino');
+  gameStatut === 'notStarted' ? (theTetrominoes = createTetrominoes(columns)) : null;
   currentPosition = Math.floor(columns / 2 - 1);
-  randomTetrominoIndex = Math.floor(Math.random() * theTetrominoes.length);
-  RotationIndex = Math.floor(Math.random() * theTetrominoes[randomTetrominoIndex].length);
-  currentTetromino = theTetrominoes[randomTetrominoIndex][RotationIndex];
+  tetrominoNumber = Math.floor(Math.random() * theTetrominoes.length);
+  console.log('tetromino number', tetrominoNumber);
+  rotationIndex = Math.floor(Math.random() * theTetrominoes[tetrominoNumber].length);
+  currentTetromino = theTetrominoes[tetrominoNumber][rotationIndex];
 }
 
-// draw the tetromino
+// draw the tetromino while in play
 function draw() {
   currentTetromino.forEach((index) => {
     blocks[currentPosition + index].classList.add('tetromino');
+    blocks[currentPosition + index].classList.add('colorT' + tetrominoNumber.toString());
   });
 }
 
-//undraw the tetromino
+// draw a new tetromino that will start on the top
+function drawNew() {
+  initTetromino();
+  draw();
+}
+
+//undraw the current tetromino
 function undraw() {
   currentTetromino.forEach((index) => {
     blocks[currentPosition + index].classList.remove('tetromino');
+    blocks[currentPosition + index].classList.remove(
+      'colorT0',
+      'colorT1',
+      'colorT2',
+      'colorT3',
+      'colorT4',
+      'colorT5',
+      'colorT6'
+    );
   });
 }
 
 //make the current tetromino move down
 function moveDown() {
-  undraw();
-  currentPosition += columns;
-  draw();
-  freeze();
+  if (freeze()) {
+    const lineToDelete = lineIsMade();
+    deleteLine(lineToDelete);
+    score(lineToDelete.length);
+    drawNew();
+  } else {
+    undraw();
+    currentPosition += columns;
+    draw();
+  }
 }
 
+function moveLeft() {
+  const isAtLeftEdge = currentTetromino.some((index) => {
+    return (index + currentPosition) % columns === 0;
+  });
+  if (!isAtLeftEdge && !lateralBlock('left')) {
+    undraw();
+    currentPosition--;
+    draw();
+  } else {
+    console.log('left boudary prevents tetromino movement');
+  }
+}
+
+function pushDown() {
+  if (!freeze()) {
+    undraw();
+    currentPosition += columns;
+    draw();
+  } else {
+    console.log('bottom boudary prevents tetromino movement');
+  }
+}
+
+function moveRight() {
+  const isAtRightEdge = currentTetromino.some((index) => {
+    return (index + currentPosition + 1) % columns === 0;
+  });
+  if (!isAtRightEdge && !lateralBlock('right')) {
+    undraw();
+    currentPosition++;
+    draw();
+  } else {
+    console.log('right boudary prevents tetromino movement');
+  }
+}
+
+// rotate domino and check that nothing is on the way (should be updated to make it smoother)
+function rotateTetromino(direction) {
+  let tempRotationIndex = rotationIndex;
+  direction === 'right' ? tempRotationIndex++ : tempRotationIndex--;
+  tempRotationIndex >= theTetrominoes[tetrominoNumber].length ? (tempRotationIndex = 0) : null;
+  tempRotationIndex < 0 ? (tempRotationIndex = theTetrominoes[tetrominoNumber].length - 1) : null;
+  // testing boudaries
+  const tempTetromino = theTetrominoes[tetrominoNumber][tempRotationIndex];
+  const willTouchLimits = tempTetromino.some((index) => {
+    return blocks[currentPosition + index + columns].classList.contains('taken');
+  });
+
+  const isAtRightEdge = tempTetromino.some((index) => {
+    return (index + currentPosition) % columns === 0;
+  });
+
+  const isAtLeftEdge = tempTetromino.some((index) => {
+    return (index + currentPosition + 1) % columns === 0;
+  });
+  if (willTouchLimits || (isAtRightEdge && isAtLeftEdge)) {
+    console.log('rotation not possible due to boudaries conflict');
+    // try again?
+  } else {
+    undraw();
+    currentTetromino = tempTetromino;
+    rotationIndex = tempRotationIndex;
+    draw();
+  }
+}
+// when the current tetromino encouters a boundary it will freeze and become part of the boudaries.
 function freeze() {
   const freezeCondition = currentTetromino.some((index) =>
     blocks[currentPosition + index + columns].classList.contains('taken')
@@ -114,11 +221,49 @@ function freeze() {
     currentTetromino.forEach((index) => {
       blocks[index + currentPosition].classList.add('taken');
     });
-    randomTetrominoIndex = Math.floor(Math.random() * theTetrominoes.length);
-    RotationIndex = Math.floor(Math.random() * theTetrominoes[randomTetrominoIndex].length);
-    currentTetromino = theTetrominoes[randomTetrominoIndex][RotationIndex];
-    currentPosition = Math.floor(columns / 2 - 1);
-    draw();
+    return true;
+  }
+  return false;
+}
+
+function lateralBlock(side) {
+  let checkSide;
+  side === 'right' ? (checkSide = 1) : (checkSide = -1);
+  return currentTetromino.some((index) =>
+    blocks[currentPosition + index + checkSide].classList.contains('taken')
+  );
+}
+
+function lineIsMade() {
+  let checkLine = [];
+  let lineToDelete = [];
+  for (let i = 0; i < columns; i++) {
+    checkLine.push(i);
+  }
+  for (let i = 0; i < rows; i++) {
+    const lineTaken = checkLine.every((index) => {
+      return blocks[i * columns + index].classList.contains('taken');
+    });
+    lineTaken ? lineToDelete.push(i) : null;
+  }
+  console.log('line complete', lineToDelete);
+  return lineToDelete;
+}
+
+function deleteLine(lineArray) {
+  for (let j = 0; j < lineArray.length; j++) {
+    let saveUpperBlockStyle = [];
+    console.log(`deleting line ${lineArray[j]}`);
+    for (let i = 0; i < lineArray[j] * columns; i++) {
+      saveUpperBlockStyle.push(blocks[i].className);
+      blocks[i].className = 'playgroundBlock';
+    }
+    for (let i = 0; i < lineArray[j] * columns; i++) {
+      let bottomCheck = blocks[i + columns].className;
+      !bottomCheck.includes('playgroundBottom')
+        ? (blocks[i + columns].className = saveUpperBlockStyle[i])
+        : null;
+    }
   }
 }
 
@@ -155,6 +300,7 @@ function generatePlaygroundGrid(blocksWidth, playgroundColumns, playgroundRows) 
   for (let i = 0; i < numberOfBlocks; i++) {
     let div = document.createElement('div');
     div.className = 'playgroundBlock';
+    // div.innerHTML = i;
     playground.appendChild(div);
   }
   for (let i = 0; i < playgroundColumns; i++) {
@@ -200,6 +346,31 @@ function handleConfigUpdate() {
   }
 }
 
+// log keyboard input
+function handleKeyPress(e) {
+  if (gameStatut === 'play') {
+    if (e.keyCode === 37) {
+      console.log('moving tetromino left');
+      moveLeft();
+    }
+    if (e.keyCode === 39) {
+      console.log('moving tetromino right');
+      moveRight();
+    }
+    if (e.keyCode === 40) {
+      console.log('moving tetromino down');
+      pushDown();
+    }
+    if (e.keyCode === 65) {
+      console.log('rotating tetromino to the left');
+      rotateTetromino('left');
+    }
+    if (e.keyCode === 90) {
+      console.log('rotating tetromino to the right');
+      rotateTetromino('right');
+    }
+  }
+}
 //---------------------------------------------------------
 
 ///////////////
@@ -208,6 +379,6 @@ function handleConfigUpdate() {
 
 // listen to configuration update from side configuration panel
 document.getElementById('configPanel').addEventListener('change', handleConfigUpdate);
-
 document.getElementById('resetButton').addEventListener('click', reset);
 document.getElementById('startButton').addEventListener('click', startGame);
+document.addEventListener('keydown', handleKeyPress);
