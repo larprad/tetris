@@ -64,6 +64,24 @@ button {
   width: 200px;
 }
 
+.instructionBox {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: left;
+  width: 200px;
+  border: 1px dashed salmon;
+  opacity: 0.5;
+}
+
+.instructionBox p {
+  padding: 0.5em;
+}
+
+.instructionBox h3 {
+  text-align: center;
+}
+
 #configPanel label {
   padding: 0.4em;
   text-align: center;
@@ -139,11 +157,3 @@ button {
 .colorT6 {
   background-color: #9b08f4;
 }
-
-/* .test {
-  background-color: blueviolet;
-}
-
-.test2 {
-  border: 3px solid red;
-} */
