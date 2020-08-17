@@ -40,10 +40,14 @@ enableConfigurationPanel(true);
 //////////////
 
 function startGame() {
+  if (gameStatut === 'lost') {
+    reset();
+  }
   if (gameStatut === 'notStarted') {
     console.log('new game is starting');
     gameScore = 0;
     score(0);
+    displayEndGame(false);
     initTetromino();
     enableConfigurationPanel(false);
     draw();
@@ -51,6 +55,7 @@ function startGame() {
   if (gameStatut === 'pause' || gameStatut === 'notStarted') {
     timerId = setInterval(moveDown, speed);
     document.getElementById('startButton').innerHTML = 'Pause Game';
+    displayPause(false);
     gameStatut = 'play';
   } else {
     console.log('game is pausing');
@@ -60,6 +65,7 @@ function startGame() {
 
 function pauseGame() {
   gameStatut = 'pause';
+  displayPause(true);
   document.getElementById('startButton').innerHTML = 'Resume';
   clearInterval(timerId);
 }
@@ -68,7 +74,9 @@ function reset() {
   cleanPlaygroundGrid();
   generatePlaygroundGrid(blockSize, columns, rows);
   initTetromino();
-  pauseGame();
+  clearInterval(timerId);
+  displayPause(false);
+  displayEndGame(false);
   gameStatut = 'notStarted';
   enableConfigurationPanel(true);
   gameScore = 0;
@@ -184,6 +192,14 @@ function moveDown() {
     deleteLine(lineToDelete);
     score(lineToDelete.length);
     drawNew();
+    const gameLost = LoseCondition();
+    if (gameLost) {
+      clearInterval(timerId);
+      gameStatut = 'lost';
+      document.getElementById('startButton').innerHTML = 'Restart';
+      console.log('GAME LOST');
+      displayEndGame(true);
+    }
   } else {
     undraw();
     currentPosition += columns;
@@ -310,6 +326,26 @@ function deleteLine(lineArray) {
         : null;
     }
   }
+}
+
+function LoseCondition() {
+  const gameLost = currentTetromino.some((index) => {
+    return blocks[currentPosition + index].classList.contains('taken');
+  });
+  return gameLost;
+}
+
+function displayEndGame(bool) {
+  const displayValue = bool ? 'flex' : 'none';
+  document.getElementById('endGame').style.display = displayValue;
+  if (bool) {
+    document.getElementById('finalScore').innerHTML = gameScore;
+  }
+}
+
+function displayPause(bool) {
+  const displayValue = bool ? 'block' : 'none';
+  document.getElementById('gamePaused').style.display = displayValue;
 }
 
 //---------------------------------------------------------

@@ -20,6 +20,11 @@ h1 {
   margin: 1em;
 }
 
+h2 {
+  font-size: 2em;
+  padding: 0.25em;
+}
+
 h3 {
   font-size: 1.2em;
   margin: 1em;
@@ -27,6 +32,51 @@ h3 {
 
 button {
   margin-top: 1em;
+}
+
+.playgroundContainer {
+  position: relative;
+  min-width: 60%;
+  /* min-height: 400px; */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  border: 1px solid gray;
+  flex-shrink: 0;
+}
+
+#gamePaused {
+  display: none;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: gray;
+}
+
+#endGame {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(128, 128, 128, 0.5);
+}
+
+#endGame .innerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
+  background-color: blueviolet;
+  width: 100%;
+}
+
+#finalScore {
+  font-size: 2.5em;
 }
 
 .grid {
@@ -106,16 +156,6 @@ button {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-}
-
-.playgroundContainer {
-  min-width: 60%;
-  min-height: 400px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  border: 1px solid gray;
-  flex-shrink: 0;
 }
 
 .sidePanel {

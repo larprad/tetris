@@ -12,7 +12,16 @@
   <body>
     <h1>Tetris</h1>
     <div class="mainContainer">
-      <div class="playgroundContainer"><div id="playground" class="grid"></div></div>
+      <div class="playgroundContainer">
+        <div id="gamePaused"><h2>GAME PAUSED</h2></div>
+        <div id="endGame">
+          <div class="innerContainer">
+            <h2>GAME OVER</h2>
+            <h3>Score: <span id="finalScore">0</span></h3>
+          </div>
+        </div>
+        <div id="playground" class="grid"></div>
+      </div>
       <div class="sidePanel">
         <div id="configPanel">
           <h3>Configuration</h3>
