@@ -9,8 +9,8 @@
 /////////////////
 
 let blockSize = 30;
-let rows = 20;
-let columns = 12;
+let rows = 15;
+let columns = 8;
 let speed = 500;
 let gameStatut = 'notStarted';
 let gameScore = 0;
@@ -22,6 +22,8 @@ let rotationIndex;
 let currentTetromino;
 let tetrominoNumber;
 let theTetrominoes;
+let deletingAnimation = 'init';
+let deletionAnimationSpeed = 500;
 
 //---------------------------------------------------------
 
@@ -78,6 +80,7 @@ function reset() {
   displayPause(false);
   displayEndGame(false);
   gameStatut = 'notStarted';
+  deletingAnimation = 'init';
   enableConfigurationPanel(true);
   gameScore = 0;
   score(0);
@@ -187,10 +190,24 @@ function undraw() {
 
 //make the current tetromino move down
 function moveDown() {
-  if (freeze()) {
-    const lineToDelete = lineIsMade();
-    deleteLine(lineToDelete);
+  const lineToDelete = lineIsMade();
+  if (deletingAnimation === 'onGoing') {
+    return;
+  }
+  console.log('freeze', freeze());
+  if (freeze() && lineToDelete.length && deletingAnimation !== 'done') {
+    console.log('I am here');
     score(lineToDelete.length);
+    animateDeleteLine(lineToDelete);
+    deletingAnimation = 'onGoing';
+    setTimeout(() => {
+      deletingAnimation = 'done';
+    }, deletionAnimationSpeed);
+    return;
+  }
+  if (freeze()) {
+    deleteLine(lineToDelete);
+    deletingAnimation = 'init';
     drawNew();
     const gameLost = LoseCondition();
     if (gameLost) {
@@ -221,6 +238,9 @@ function moveLeft() {
 }
 
 function pushDown() {
+  if (deletingAnimation !== 'init') {
+    return;
+  }
   if (!freeze()) {
     undraw();
     currentPosition += columns;
@@ -287,6 +307,13 @@ function freeze() {
   return false;
 }
 
+// function willFreeze() {
+//   const freezeCondition = currentTetromino.some((index) =>
+//     blocks[currentPosition + index + columns].classList.contains('taken')
+//   );
+//   return freezeCondition;
+// }
+
 function lateralBlock(side) {
   let checkSide;
   side === 'right' ? (checkSide = 1) : (checkSide = -1);
@@ -303,12 +330,30 @@ function lineIsMade() {
   }
   for (let i = 0; i < rows; i++) {
     const lineTaken = checkLine.every((index) => {
-      return blocks[i * columns + index].classList.contains('taken');
+      // console.log('block index', i * columns + index);
+      return (
+        blocks[i * columns + index].classList.contains('taken') ||
+        blocks[i * columns + index].classList.contains('tetromino')
+      );
     });
     lineTaken ? lineToDelete.push(i) : null;
   }
-  console.log('line complete', lineToDelete);
+  lineToDelete ? console.log('line complete', lineToDelete) : 0;
   return lineToDelete;
+}
+
+function toggleDelete() {
+  deleting = false;
+}
+
+function animateDeleteLine(lineToDelete) {
+  // deleting = true;
+  // setTimeout(toggleDelete, 1000);
+  for (let i = 0; i < columns; i++) {
+    lineToDelete.forEach(
+      (index) => (blocks[columns * index + i].className = 'playgroundBlock taken erasing')
+    );
+  }
 }
 
 function deleteLine(lineArray) {
@@ -381,7 +426,7 @@ function generatePlaygroundGrid(blocksWidth, playgroundColumns, playgroundRows) 
   for (let i = 0; i < numberOfBlocks; i++) {
     let div = document.createElement('div');
     div.className = 'playgroundBlock';
-    // div.innerHTML = i;
+    div.innerHTML = i;
     playground.appendChild(div);
   }
   for (let i = 0; i < playgroundColumns; i++) {

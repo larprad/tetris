@@ -101,6 +101,20 @@ button {
   justify-content: center;
 }
 
+.erasing {
+  animation: colorFlick 0.2s 2;
+}
+
+@keyframes colorFlick {
+  0%,
+  100% {
+    background-color: white;
+  }
+  50% {
+    background-color: black;
+  }
+}
+
 .playgroundBottom {
   width: var(--block-width);
 }
