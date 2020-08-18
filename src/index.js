@@ -4,16 +4,22 @@
 
 //---------------------------------------------------------
 
+import './styles/reset.css';
+import './styles/style.css';
+
+
 /////////////////
 // GLOBAL VARS //
 /////////////////
 
 let blockSize = 30;
-let rows = 15;
-let columns = 8;
+let rows = 18;
+let columns = 10;
 let speed = 500;
 let gameStatut = 'notStarted';
 let gameScore = 0;
+
+let devMode = false;
 
 let timerId;
 let blocks;
@@ -342,10 +348,6 @@ function lineIsMade() {
   return lineToDelete;
 }
 
-function toggleDelete() {
-  deleting = false;
-}
-
 function animateDeleteLine(lineToDelete) {
   // deleting = true;
   // setTimeout(toggleDelete, 1000);
@@ -426,7 +428,7 @@ function generatePlaygroundGrid(blocksWidth, playgroundColumns, playgroundRows) 
   for (let i = 0; i < numberOfBlocks; i++) {
     let div = document.createElement('div');
     div.className = 'playgroundBlock';
-    div.innerHTML = i;
+    devMode ? (div.innerHTML = i) : null;
     playground.appendChild(div);
   }
   for (let i = 0; i < playgroundColumns; i++) {
