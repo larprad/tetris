@@ -3,7 +3,6 @@ export const init = {
   rows: 18,
   columns: 10,
   speed: 500,
-  gameScore: 0,
   gameStatut: 'notStarted',
   devMode: false,
   deletionAnimationSpeed: 500,
@@ -33,7 +32,7 @@ export const configPanel = {
     document.getElementById('blockSpeed').value = init.speed / 100;
   },
 
-  enableConfigurationPanel(bool) {
+  enableDisplay(bool) {
     document.getElementById('rowNumber').disabled = !bool;
     document.getElementById('columnNumber').disabled = !bool;
     document.getElementById('blockSize').disabled = !bool;
