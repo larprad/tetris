@@ -4,6 +4,10 @@
 
 //---------------------------------------------------------
 
+/////////////
+// IMPORTS //
+/////////////
+
 import { init, configPanel } from './modules/config';
 import { playground } from './modules/playground';
 import { tetromino } from './modules/tetrominoes';
@@ -13,8 +17,6 @@ import { tetromino } from './modules/tetrominoes';
 /////////////////
 
 let timerId;
-let deletingAnimation = 'init';
-let deletionAnimationSpeed = 500;
 
 //---------------------------------------------------------
 
@@ -46,7 +48,7 @@ function startGame() {
     tetromino.draw();
   }
   if (init.gameStatut === 'pause' || init.gameStatut === 'notStarted') {
-    timerId = setInterval(moveDown, init.speed);
+    timerId = setInterval(gameActive, init.speed);
     document.getElementById('startButton').innerHTML = 'Pause Game';
     displayPause(false);
     init.gameStatut = 'play';
@@ -71,7 +73,7 @@ function reset() {
   displayPause(false);
   displayEndGame(false);
   init.gameStatut = 'notStarted';
-  deletingAnimation = 'init';
+  playground.deletingAnimation = 'init';
   configPanel.enableConfigurationPanel(true);
   init.gameScore = 0;
   score(0);
@@ -91,26 +93,27 @@ function score(lines) {
 // PLAYGROUND //
 ////////////////
 
-//make the current tetromino move down
-function moveDown() {
-  const lineToDelete = lineIsMade();
-  if (deletingAnimation === 'onGoing') {
+// to facto & debug
+function gameActive() {
+  if (playground.deletingAnimation === 'onGoing') {
+    // animation onGoing, nothing will happen
     return;
   }
-  console.log('freeze', freeze());
-  if (freeze() && lineToDelete.length && deletingAnimation !== 'done') {
-    console.log('I am here');
+  const lineToDelete = playground.lineIsMade();
+  const tetrominoTouchDown = tetromino.freeze();
+  if (tetrominoTouchDown && lineToDelete.length && playground.deletingAnimation !== 'done') {
+    console.log();
     score(lineToDelete.length);
-    animateDeleteLine(lineToDelete);
-    deletingAnimation = 'onGoing';
+    playground.animateDeleteLine(lineToDelete);
+    playground.deletingAnimation = 'onGoing';
     setTimeout(() => {
-      deletingAnimation = 'done';
-    }, deletionAnimationSpeed);
+      playground.deletingAnimation = 'done';
+    }, init.deletionAnimationSpeed);
     return;
   }
-  if (freeze()) {
-    deleteLine(lineToDelete);
-    deletingAnimation = 'init';
+  if (tetrominoTouchDown) {
+    playground.deleteLine(lineToDelete);
+    playground.deletingAnimation = 'init';
     tetromino.drawNew();
     const gameLost = LoseCondition();
     if (gameLost) {
@@ -121,116 +124,7 @@ function moveDown() {
       displayEndGame(true);
     }
   } else {
-    tetromino.undraw();
-    tetromino.position += init.columns;
-    tetromino.draw();
-  }
-}
-
-function moveLeft() {
-  const isAtLeftEdge = tetromino.current.some((index) => {
-    return (index + tetromino.position) % init.columns === 0;
-  });
-  if (!isAtLeftEdge && !lateralBlock('left')) {
-    tetromino.undraw();
-    tetromino.position--;
-    tetromino.draw();
-  } else {
-    console.log('left boudary prevents tetromino movement');
-  }
-}
-
-function pushDown() {
-  if (deletingAnimation !== 'init') {
-    return;
-  }
-  if (!freeze()) {
-    tetromino.undraw();
-    tetromino.position += init.columns;
-    tetromino.draw();
-  } else {
-    console.log('bottom boudary prevents tetromino movement');
-  }
-}
-
-function moveRight() {
-  const isAtRightEdge = tetromino.current.some((index) => {
-    return (index + tetromino.position + 1) % init.columns === 0;
-  });
-  if (!isAtRightEdge && !lateralBlock('right')) {
-    tetromino.undraw();
-    tetromino.position++;
-    tetromino.draw();
-  } else {
-    console.log('right boudary prevents tetromino movement');
-  }
-}
-
-// when the current tetromino encouters a boundary it will freeze and become part of the boudaries.
-function freeze() {
-  const freezeCondition = tetromino.current.some((index) =>
-    playground.blocks[tetromino.position + index + init.columns].classList.contains('taken')
-  );
-  if (freezeCondition) {
-    console.log('TOUCH DOWN! new tetromino in the way');
-    tetromino.current.forEach((index) => {
-      playground.blocks[index + tetromino.position].classList.add('taken');
-    });
-    return true;
-  }
-  return false;
-}
-
-function lateralBlock(side) {
-  let checkSide;
-  side === 'right' ? (checkSide = 1) : (checkSide = -1);
-  return tetromino.current.some((index) =>
-    playground.blocks[tetromino.position + index + checkSide].classList.contains('taken')
-  );
-}
-
-function lineIsMade() {
-  let checkLine = [];
-  let lineToDelete = [];
-  for (let i = 0; i < init.columns; i++) {
-    checkLine.push(i);
-  }
-  for (let i = 0; i < init.rows; i++) {
-    const lineTaken = checkLine.every((index) => {
-      return (
-        playground.blocks[i * init.columns + index].classList.contains('taken') ||
-        playground.blocks[i * init.columns + index].classList.contains('tetromino')
-      );
-    });
-    lineTaken ? lineToDelete.push(i) : null;
-  }
-  lineToDelete ? console.log('line complete', lineToDelete) : 0;
-  return lineToDelete;
-}
-
-function animateDeleteLine(lineToDelete) {
-  for (let i = 0; i < init.columns; i++) {
-    lineToDelete.forEach(
-      (index) =>
-        (playground.blocks[init.columns * index + i].className = 'playgroundBlock taken erasing')
-    );
-  }
-}
-
-function deleteLine(lineArray) {
-  for (let j = 0; j < lineArray.length; j++) {
-    let saveUpperBlockStyle = [];
-    console.log(`deleting line ${lineArray[j]}`);
-    for (let i = 0; i < lineArray[j] * init.columns; i++) {
-      saveUpperBlockStyle.push(playground.blocks[i].className);
-      playground.blocks[i].className = 'playgroundBlock';
-    }
-    for (let i = 0; i < lineArray[j] * init.columns; i++) {
-      let bottomCheck = playground.blocks[i + init.columns].className;
-      !bottomCheck.includes('playgroundBottom')
-        ? (playground.blocks[i + init.columns].className = saveUpperBlockStyle[i])
-        : null;
-    }
+    tetromino.moveDown();
   }
 }
 
@@ -265,15 +159,15 @@ function handleKeyPress(e) {
   if (init.gameStatut === 'play') {
     if (e.keyCode === 37) {
       console.log('moving tetromino left');
-      moveLeft();
+      tetromino.moveLeft();
     }
     if (e.keyCode === 39) {
       console.log('moving tetromino right');
-      moveRight();
+      tetromino.moveRight();
     }
     if (e.keyCode === 40) {
       console.log('moving tetromino down');
-      pushDown();
+      tetromino.pushDown();
     }
     if (e.keyCode === 65) {
       console.log('rotating tetromino to the left');

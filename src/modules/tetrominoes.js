@@ -106,4 +106,66 @@ export const tetromino = {
       playground.blocks[this.position + index].className = 'playgroundBlock';
     });
   },
+  moveDown() {
+    this.undraw();
+    this.position += init.columns;
+    this.draw();
+  },
+  moveLeft() {
+    const isAtLeftEdge = this.current.some((index) => {
+      return (index + this.position) % init.columns === 0;
+    });
+    if (!isAtLeftEdge && !this.lateralBlock('left')) {
+      this.undraw();
+      this.position--;
+      this.draw();
+    } else {
+      console.log('left boudary prevents tetromino movement');
+    }
+  },
+  pushDown() {
+    if (playground.deletingAnimation !== 'init') {
+      return;
+    }
+    if (!this.freeze()) {
+      this.undraw();
+      this.position += init.columns;
+      this.draw();
+    } else {
+      console.log('bottom boudary prevents tetromino movement');
+    }
+  },
+  moveRight() {
+    const isAtRightEdge = this.current.some((index) => {
+      return (index + this.position + 1) % init.columns === 0;
+    });
+    if (!isAtRightEdge && !this.lateralBlock('right')) {
+      this.undraw();
+      this.position++;
+      this.draw();
+    } else {
+      console.log('right boudary prevents tetromino movement');
+    }
+  },
+  // when the current tetromino encouters a boundary it will freeze and become part of the boudaries.
+  freeze() {
+    const freezeCondition = this.current.some((index) =>
+      playground.blocks[this.position + index + init.columns].classList.contains('taken')
+    );
+    if (freezeCondition) {
+      console.log('TOUCH DOWN! new tetromino in the way');
+      this.current.forEach((index) => {
+        playground.blocks[index + this.position].classList.add('taken');
+      });
+      return true;
+    }
+    return false;
+  },
+  lateralBlock(side) {
+    let checkSide;
+    side === 'right' ? (checkSide = 1) : (checkSide = -1);
+    return this.current.some((index) =>
+      playground.blocks[this.position + index + checkSide].classList.contains('taken')
+    );
+  },
 };

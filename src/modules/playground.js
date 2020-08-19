@@ -2,6 +2,7 @@ import { init, configPanel } from './config';
 
 export const playground = {
   blocks: [],
+  deletingAnimation: 'init',
   generatePlaygroundGrid() {
     console.log('generating playground blocks');
     const playground = document.getElementById('playground');
@@ -37,6 +38,48 @@ export const playground = {
     if (haveRowsAndColumnsChanged) {
       this.cleanPlaygroundGrid();
       this.generatePlaygroundGrid();
+    }
+  },
+  lineIsMade() {
+    let checkLine = [];
+    let lineToDelete = [];
+    for (let i = 0; i < init.columns; i++) {
+      checkLine.push(i);
+    }
+    for (let i = 0; i < init.rows; i++) {
+      const lineTaken = checkLine.every((index) => {
+        return (
+          this.blocks[i * init.columns + index].classList.contains('taken') ||
+          this.blocks[i * init.columns + index].classList.contains('tetromino')
+        );
+      });
+      lineTaken ? lineToDelete.push(i) : null;
+    }
+    lineToDelete.length ? console.log('line complete', lineToDelete) : 0;
+    return lineToDelete;
+  },
+  animateDeleteLine(lineToDelete) {
+    for (let i = 0; i < init.columns; i++) {
+      lineToDelete.forEach(
+        (index) =>
+          (this.blocks[init.columns * index + i].className = 'playgroundBlock taken erasing')
+      );
+    }
+  },
+  deleteLine(lineArray) {
+    for (let j = 0; j < lineArray.length; j++) {
+      let saveUpperBlockStyle = [];
+      console.log(`deleting line ${lineArray[j]}`);
+      for (let i = 0; i < lineArray[j] * init.columns; i++) {
+        saveUpperBlockStyle.push(this.blocks[i].className);
+        this.blocks[i].className = 'playgroundBlock';
+      }
+      for (let i = 0; i < lineArray[j] * init.columns; i++) {
+        let bottomCheck = this.blocks[i + init.columns].className;
+        !bottomCheck.includes('playgroundBottom')
+          ? (this.blocks[i + init.columns].className = saveUpperBlockStyle[i])
+          : null;
+      }
     }
   },
 };

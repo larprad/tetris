@@ -6,6 +6,7 @@ export const init = {
   gameScore: 0,
   gameStatut: 'notStarted',
   devMode: false,
+  deletionAnimationSpeed: 500,
 };
 
 export const configPanel = {
