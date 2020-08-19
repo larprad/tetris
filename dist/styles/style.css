@@ -6,7 +6,10 @@ html {
 }
 
 body {
-  background-color: black;
+  /* background-color: black; */
+  background: url('https://cutewallpaper.org/21/space-1080/Download-wallpaper-1920x1080-stars,-space,-galaxy-full-hd-.jpg');
+  background-repeat: repeat;
+  background-size: cover;
   color: white;
   font-family: sans-serif;
   display: flex;
@@ -16,7 +19,7 @@ body {
 }
 
 h1 {
-  font-size: 3em;
+  font-size: 4em;
   margin: 1em;
 }
 
@@ -32,16 +35,19 @@ h3 {
 
 button {
   margin-top: 1em;
+  width: 70%;
 }
 
 .playgroundContainer {
   position: relative;
   min-width: 60%;
+  min-width: 720px;
   /* min-height: 400px; */
   display: flex;
   justify-content: center;
   align-items: flex-start;
   border: 1px solid gray;
+  background-color: rgb(20, 20, 20);
   flex-shrink: 0;
 }
 
@@ -120,7 +126,11 @@ button {
 }
 
 #configPanel {
+  position: absolute;
+  bottom: 0;
+  right: 0;
   display: flex;
+  display: none;
   justify-content: center;
   flex-direction: column;
   background-color: grey;
@@ -169,15 +179,28 @@ button {
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: stretch;
 }
 
 .sidePanel {
-  padding: 1em;
   display: flex;
   justify-content: start;
   align-items: center;
+  margin-left: 1em;
+  border: 1px solid gray;
+  background-color: rgb(20, 20, 20);
   flex-direction: column;
+}
+
+#nextTetrominoBox {
+  margin: 1em;
+  width: calc(4 * var(--block-width));
+  height: calc(4 * var(--block-width));
+  border: 3px solid white;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: content-box;
+  flex-shrink: 0;
 }
 
 .tetromino {

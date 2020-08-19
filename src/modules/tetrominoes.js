@@ -6,60 +6,80 @@ export const tetromino = {
   position: 0,
   rotation: 0,
   current: [],
+  next: {},
   theTetrominoes: [],
-  createTetrominoes() {
+  theTetrominoesPreview: [],
+  createTetrominoes(columns) {
     const iTetromino = [
-      [1, init.columns + 1, init.columns * 2 + 1, init.columns * 3 + 1],
+      [1, columns + 1, columns * 2 + 1, columns * 3 + 1],
       [0, 1, 2, 3],
-      [1, init.columns + 1, init.columns * 2 + 1, init.columns * 3 + 1],
+      [1, columns + 1, columns * 2 + 1, columns * 3 + 1],
       [0, 1, 2, 3],
     ];
     const llTetromino = [
-      [0, init.columns, init.columns + 1, init.columns + 2],
-      [1, 2, init.columns + 1, init.columns * 2 + 1],
-      [0, 1, 2, init.columns + 2],
-      [1, init.columns + 1, init.columns * 2, init.columns * 2 + 1],
+      [0, columns, columns + 1, columns + 2],
+      [1, 2, columns + 1, columns * 2 + 1],
+      [0, 1, 2, columns + 2],
+      [1, columns + 1, columns * 2, columns * 2 + 1],
     ];
     const lrTetromino = [
-      [2, init.columns, init.columns + 1, init.columns + 2],
-      [1, init.columns + 1, init.columns * 2 + 1, init.columns * 2 + 2],
-      [0, 1, 2, init.columns],
-      [0, 1, init.columns + 1, init.columns * 2 + 1],
+      [2, columns, columns + 1, columns + 2],
+      [1, columns + 1, columns * 2 + 1, columns * 2 + 2],
+      [0, 1, 2, columns],
+      [0, 1, columns + 1, columns * 2 + 1],
     ];
     const oTetromino = [
-      [1, 2, init.columns + 1, init.columns + 2],
-      [1, 2, init.columns + 1, init.columns + 2],
-      [1, 2, init.columns + 1, init.columns + 2],
-      [1, 2, init.columns + 1, init.columns + 2],
+      [1, 2, columns + 1, columns + 2],
+      [1, 2, columns + 1, columns + 2],
+      [1, 2, columns + 1, columns + 2],
+      [1, 2, columns + 1, columns + 2],
     ];
     const sTetromino = [
-      [1, 2, init.columns, init.columns + 1],
-      [1, init.columns + 1, init.columns + 2, init.columns * 2 + 2],
-      [1, 2, init.columns, init.columns + 1],
-      [1, init.columns + 1, init.columns + 2, init.columns * 2 + 2],
+      [1, 2, columns, columns + 1],
+      [1, columns + 1, columns + 2, columns * 2 + 2],
+      [1, 2, columns, columns + 1],
+      [1, columns + 1, columns + 2, columns * 2 + 2],
     ];
     const zTetromino = [
-      [0, 1, init.columns + 1, init.columns + 2],
-      [2, init.columns + 1, init.columns + 2, init.columns * 2 + 1],
-      [0, 1, init.columns + 1, init.columns + 2],
-      [2, init.columns + 1, init.columns + 2, init.columns * 2 + 1],
+      [0, 1, columns + 1, columns + 2],
+      [2, columns + 1, columns + 2, columns * 2 + 1],
+      [0, 1, columns + 1, columns + 2],
+      [2, columns + 1, columns + 2, columns * 2 + 1],
     ];
     const tTetromino = [
-      [1, init.columns, init.columns + 1, init.columns + 2],
-      [1, init.columns + 1, init.columns + 2, init.columns * 2 + 1],
-      [0, 1, 2, init.columns + 1],
-      [2, init.columns + 1, init.columns + 2, init.columns * 2 + 2],
+      [1, columns, columns + 1, columns + 2],
+      [1, columns + 1, columns + 2, columns * 2 + 1],
+      [0, 1, 2, columns + 1],
+      [2, columns + 1, columns + 2, columns * 2 + 2],
     ];
 
     return [iTetromino, llTetromino, lrTetromino, oTetromino, sTetromino, zTetromino, tTetromino];
   },
+  initPreview() {
+    const number = Math.floor(Math.random() * this.theTetrominoes.length);
+    const rotation = Math.floor(Math.random() * this.theTetrominoes[this.number].length);
+    const tetromino = this.theTetrominoesPreview[number][rotation];
+    this.next = {
+      number,
+      rotation,
+      tetromino,
+    };
+  },
   initTetromino() {
     console.log('init new tetromino');
-    init.gameStatut === 'notStarted' ? (this.theTetrominoes = this.createTetrominoes()) : null;
+    if (init.gameStatut === 'notStarted') {
+      this.theTetrominoes = this.createTetrominoes(init.columns);
+      this.theTetrominoesPreview = this.createTetrominoes(init.previewSize);
+      this.initPreview();
+    }
+
+    this.number = this.next.number;
+    this.rotation = this.next.rotation;
     this.position = Math.floor(init.columns / 2 - 1);
-    this.number = Math.floor(Math.random() * this.theTetrominoes.length);
+
+    this.initPreview();
+
     console.log('tetromino number', this.number);
-    this.rotation = Math.floor(Math.random() * this.theTetrominoes[this.number].length);
     this.current = this.theTetrominoes[this.number][this.rotation];
   },
   rotateTetromino(direction) {
@@ -91,6 +111,14 @@ export const tetromino = {
       this.draw();
     }
   },
+  drawPreview() {
+    console.log('drawing preview tetromino');
+    playground.cleanPreviewGrid();
+    this.next.tetromino.forEach((index) => {
+      playground.preview[index].classList.add('tetromino');
+      playground.preview[index].classList.add('colorT' + this.next.number.toString());
+    });
+  },
   draw() {
     this.current.forEach((index) => {
       playground.blocks[this.position + index].classList.add('tetromino');
@@ -100,6 +128,7 @@ export const tetromino = {
   drawNew() {
     this.initTetromino();
     this.draw();
+    this.drawPreview();
   },
   undraw() {
     this.current.forEach((index) => {

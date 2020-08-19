@@ -11,6 +11,7 @@ export const game = {
     configPanel.displayInitialConfiguration();
     configPanel.enableDisplay(true);
     playground.generatePlaygroundGrid();
+    playground.generatePreviewGrid();
     inputs.initListener();
   },
   start() {
@@ -22,9 +23,8 @@ export const game = {
       this.gameScore = 0;
       this.updateScore(0);
       display.endGame(false);
-      tetromino.initTetromino();
       configPanel.enableDisplay(false);
-      tetromino.draw();
+      tetromino.drawNew();
     }
     if (init.gameStatut === 'pause' || init.gameStatut === 'notStarted') {
       this.timerId = setInterval(this.gameActive.bind(this), init.speed);
@@ -43,6 +43,7 @@ export const game = {
     clearInterval(this.timerId);
   },
   reset() {
+    playground.cleanPreviewGrid();
     playground.cleanPlaygroundGrid();
     playground.generatePlaygroundGrid();
     tetromino.initTetromino();

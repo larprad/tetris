@@ -2,6 +2,7 @@ import { init, configPanel } from './config';
 
 export const playground = {
   blocks: [],
+  preview: [],
   deletingAnimation: 'init',
   generatePlaygroundGrid() {
     console.log('generating playground blocks');
@@ -24,6 +25,23 @@ export const playground = {
     }
     this.blocks = Array.from(document.querySelectorAll('.grid div'));
     console.log(`${numberOfBlocks} blocks have been generated`);
+  },
+  generatePreviewGrid() {
+    console.log('generating preview blocks');
+    const preview = document.getElementById('nextTetrominoBox');
+    const root = document.querySelector('html');
+    const numberOfBlocks = 16;
+    for (let i = 0; i < numberOfBlocks; i++) {
+      let div = document.createElement('div');
+      div.className = 'playgroundBlock';
+      init.devMode ? (div.innerHTML = i) : null;
+      preview.appendChild(div);
+    }
+    this.preview = Array.from(document.querySelectorAll('#nextTetrominoBox div'));
+    console.log(`${numberOfBlocks} blocks have been generated for the preview`);
+  },
+  cleanPreviewGrid() {
+    this.preview.forEach((index) => (index.className = 'playgroundBlock'));
   },
   cleanPlaygroundGrid() {
     const playgroundToClean = document.getElementById('playground');

@@ -10,7 +10,7 @@
     <title>Tetris</title>
   </head>
   <body>
-    <h1>Tetris</h1>
+    <h1>TETRIS</h1>
     <div class="mainContainer">
       <div class="playgroundContainer">
         <div id="gamePaused"><h2>GAME PAUSED</h2></div>
@@ -23,26 +23,28 @@
         <div id="playground" class="grid"></div>
       </div>
       <div class="sidePanel">
-        <div id="configPanel">
-          <h3>Configuration</h3>
-          <label for="rows">rows</label>
-          <input id="rowNumber" type="number" name="rows" value="0" />
-          <label for="columns">columns</label>
-          <input id="columnNumber" type="number" name="columns" value="0" />
-          <label for="blockSize">block size (px)</label>
-          <input id="blockSize" type="number" name="blockSize" value="0" />
-          <label for="blockSpeed">block speed</label>
-          <input id="blockSpeed" type="number" name="blockSpeed" value="0" min="0" max="15" />
-        </div>
+        <div id="nextTetrominoBox"></div>
+
+        <h3>Score: <span id="score">0</span></h3>
         <button id="startButton">Start Game</button>
         <button id="resetButton">Reset Game</button>
-        <h3>Score: <span id="score">0</span></h3>
-        <div class="instructionBox">
+        <!-- <div class="instructionBox">
           <h3>Controls</h3>
           <p>Move block: ← ↓ →</p>
           <p>Rotate Left: A</p>
           <p>Rotate Right: Z</p>
-        </div>
+        </div> -->
+      </div>
+      <div id="configPanel">
+        <h3>Configuration</h3>
+        <label for="rows">rows</label>
+        <input id="rowNumber" type="number" name="rows" value="0" />
+        <label for="columns">columns</label>
+        <input id="columnNumber" type="number" name="columns" value="0" />
+        <label for="blockSize">block size (px)</label>
+        <input id="blockSize" type="number" name="blockSize" value="0" />
+        <label for="blockSpeed">block speed</label>
+        <input id="blockSpeed" type="number" name="blockSpeed" value="0" min="0" max="15" />
       </div>
     </div>
   </body>

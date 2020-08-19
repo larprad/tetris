@@ -2,10 +2,11 @@ export const init = {
   blockSize: 30,
   rows: 18,
   columns: 10,
-  speed: 500,
+  speed: 400,
   gameStatut: 'notStarted',
   devMode: false,
   deletionAnimationSpeed: 500,
+  previewSize: 4,
 };
 
 export const configPanel = {
