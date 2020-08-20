@@ -12,7 +12,8 @@
     "webpack-cli": "^3.3.12"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "surge --project ./dist/ --domain tetromino.surge.sh"
   },
   "repository": {
     "type": "git",

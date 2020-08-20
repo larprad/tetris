@@ -1,11 +1,14 @@
 import { init } from './config';
 import { playground } from './playground';
+import { game } from './game';
 
 export const tetromino = {
   number: 0,
   position: 0,
   rotation: 0,
   current: [],
+  canBeSaved: true,
+  saved: {},
   next: {},
   theTetrominoes: [],
   theTetrominoesPreview: [],
@@ -65,9 +68,16 @@ export const tetromino = {
       tetromino,
     };
   },
+  initSaved() {
+    this.saved = {
+      number: 0,
+      rotation: 0,
+      tetromino: [],
+    };
+  },
   initTetromino() {
     console.log('init new tetromino');
-    if (init.gameStatut === 'notStarted') {
+    if (game.gameStatut === 'notStarted') {
       this.theTetrominoes = this.createTetrominoes(init.columns);
       this.theTetrominoesPreview = this.createTetrominoes(init.previewSize);
       this.initPreview();
@@ -76,11 +86,27 @@ export const tetromino = {
     this.number = this.next.number;
     this.rotation = this.next.rotation;
     this.position = Math.floor(init.columns / 2 - 1);
+    this.canBeSaved = true;
 
     this.initPreview();
 
     console.log('tetromino number', this.number);
     this.current = this.theTetrominoes[this.number][this.rotation];
+  },
+  saveTetromino() {
+    this.saved = {
+      number: this.number,
+      rotation: this.rotation,
+      tetromino: this.theTetrominoesPreview[this.number][this.rotation],
+    };
+  },
+  switchSaved() {
+    const wasSaved = this.saved;
+    this.saveTetromino();
+    this.number = wasSaved.number;
+    this.rotation = wasSaved.rotation;
+    this.current = this.theTetrominoes[this.number][this.rotation];
+    this.canBeSaved = false;
   },
   rotateTetromino(direction) {
     let tempRotationIndex = this.rotation;
@@ -117,6 +143,14 @@ export const tetromino = {
     this.next.tetromino.forEach((index) => {
       playground.preview[index].classList.add('tetromino');
       playground.preview[index].classList.add('colorT' + this.next.number.toString());
+    });
+  },
+  drawSaved() {
+    console.log('drawing saved tetromino');
+    playground.cleanSavedGrid();
+    this.saved.tetromino.forEach((index) => {
+      playground.saved[index].classList.add('tetromino');
+      playground.saved[index].classList.add('colorT' + this.saved.number.toString());
     });
   },
   draw() {

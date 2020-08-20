@@ -3,7 +3,6 @@ export const init = {
   rows: 18,
   columns: 10,
   speed: 400,
-  gameStatut: 'notStarted',
   devMode: false,
   deletionAnimationSpeed: 500,
   previewSize: 4,
@@ -27,10 +26,15 @@ export const configPanel = {
   },
 
   displayInitialConfiguration() {
-    document.getElementById('rowNumber').value = init.rows;
-    document.getElementById('columnNumber').value = init.columns;
-    document.getElementById('blockSize').value = init.blockSize;
-    document.getElementById('blockSpeed').value = init.speed / 100;
+    if (init.devMode) {
+      document.getElementById('configPanel').style.display = 'flex';
+      document.getElementById('rowNumber').value = init.rows;
+      document.getElementById('columnNumber').value = init.columns;
+      document.getElementById('blockSize').value = init.blockSize;
+      document.getElementById('blockSpeed').value = init.speed / 100;
+    } else {
+      document.getElementById('configPanel').style.display = 'none';
+    }
   },
 
   enableDisplay(bool) {

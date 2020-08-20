@@ -29,8 +29,7 @@ export const playground = {
   generatePreviewGrid() {
     console.log('generating preview blocks');
     const preview = document.getElementById('nextTetrominoBox');
-    const root = document.querySelector('html');
-    const numberOfBlocks = 16;
+    const numberOfBlocks = Math.pow(init.previewSize, 2);
     for (let i = 0; i < numberOfBlocks; i++) {
       let div = document.createElement('div');
       div.className = 'playgroundBlock';
@@ -40,14 +39,41 @@ export const playground = {
     this.preview = Array.from(document.querySelectorAll('#nextTetrominoBox div'));
     console.log(`${numberOfBlocks} blocks have been generated for the preview`);
   },
+  generateSavedGrid() {
+    console.log('generating saved blocks');
+    const saved = document.getElementById('savedTetrominoBox');
+    const numberOfBlocks = Math.pow(init.previewSize, 2);
+    for (let i = 0; i < numberOfBlocks; i++) {
+      let div = document.createElement('div');
+      div.className = 'playgroundBlock';
+      init.devMode ? (div.innerHTML = i) : null;
+      saved.appendChild(div);
+    }
+    this.saved = Array.from(document.querySelectorAll('#savedTetrominoBox div'));
+    console.log(`${numberOfBlocks} blocks have been generated for the save slot`);
+  },
+  generateAllGrid() {
+    this.generatePlaygroundGrid();
+    this.generatePreviewGrid();
+    this.generateSavedGrid();
+  },
+
   cleanPreviewGrid() {
     this.preview.forEach((index) => (index.className = 'playgroundBlock'));
+  },
+  cleanSavedGrid() {
+    this.saved.forEach((index) => (index.className = 'playgroundBlock'));
   },
   cleanPlaygroundGrid() {
     const playgroundToClean = document.getElementById('playground');
     while (playgroundToClean.firstChild) {
       playgroundToClean.removeChild(playgroundToClean.firstChild);
     }
+  },
+  cleanAllGrid() {
+    this.cleanPlaygroundGrid();
+    this.cleanPreviewGrid();
+    this.cleanSavedGrid();
   },
   handleConfigUpdate() {
     console.log('update configuration');

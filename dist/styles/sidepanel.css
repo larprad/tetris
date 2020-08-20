@@ -1,0 +1,64 @@
+.sidePanel {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  padding: 1em;
+  border: 1px solid gray;
+  background-color: rgb(20, 20, 20);
+  flex-direction: column;
+}
+
+.spRight {
+  margin-left: 1em;
+}
+
+.spLeft {
+  margin-right: 1em;
+}
+
+.sideBox {
+  position: relative;
+  width: calc(4 * var(--block-width));
+  height: calc(4 * var(--block-width));
+  border: 3px solid white;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: content-box;
+  flex-shrink: 0;
+}
+
+.littleBoxTitle {
+  margin-top: 0;
+  width: 100%;
+  background-color: white;
+  color: black;
+  text-align: center;
+  padding: 0.2em;
+}
+
+.instructionBox {
+  color: gray;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px dashed rgb(133, 133, 133);
+  margin-top: 3em;
+  width: 100%;
+}
+
+.instructionBox h3 {
+  padding: 0.4em;
+  margin: 0;
+  margin-bottom: 0.5em;
+  color: White;
+  width: 100%;
+  border-bottom: 1px dashed rgb(133, 133, 133);
+  text-align: center;
+}
+
+.instructionBox p {
+  padding: 0.3em;
+  margin-bottom: 0.2em;
+}
