@@ -3,6 +3,7 @@
 @import './playground.css';
 @import './configTEMP.css';
 @import './tetromino.css';
+@import './menu.css';
 
 html {
   --columns: 10;
@@ -32,6 +33,7 @@ h1 {
 h2 {
   font-size: 2em;
   padding: 0.25em;
+  text-align: center;
 }
 
 h3 {
@@ -42,6 +44,12 @@ h3 {
 button {
   margin-top: 1em;
   width: 100%;
+  padding: 0.2em 0;
+  cursor: pointer;
+}
+
+.hide {
+  display: none;
 }
 
 #gamePaused {
@@ -80,6 +88,7 @@ button {
 
 .mainContainer {
   width: 100%;
+  max-width: 720px;
   display: flex;
   justify-content: center;
   align-items: stretch;

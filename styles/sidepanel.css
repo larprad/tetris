@@ -9,6 +9,10 @@
   flex-direction: column;
 }
 
+.sidePanel h3 {
+  margin: 1em 0;
+}
+
 .spRight {
   margin-left: 1em;
 }
@@ -46,6 +50,7 @@
   border: 1px dashed rgb(133, 133, 133);
   margin-top: 3em;
   width: 100%;
+  font-size: 0.8em;
 }
 
 .instructionBox h3 {

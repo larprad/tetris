@@ -11,7 +11,13 @@
   <body>
     <h1>TETRIS</h1>
     <div class="mainContainer">
-      <div class="sidePanel spLeft">
+      <div id="mainMenu" class="mainMenu">
+        <button id="enduranceMode" class="gameMode">Endurance</button>
+        <button class="gameMode" disabled>Survivor</button>
+        <button class="gameMode" disabled>Time Attack</button>
+        <button class="gameMode" disabled>Leaderboard</button>
+      </div>
+      <div id="sidePanelLeft" class="sidePanel spLeft hide">
         <div id="savedTetrominoBox" class="sideBox"></div>
         <h4 class="littleBoxTitle">SAVED</h4>
         <div class="instructionBox">
@@ -22,11 +28,12 @@
           <p>A</p>
           <p>Rotate Right</p>
           <p>Z</p>
-          <p>Save tetromino</p>
+          <p>Save block</p>
           <p>E</p>
         </div>
+        <button id="backMenu">← Menu</button>
       </div>
-      <div class="playgroundContainer">
+      <div id="playgroundContainer" class="playgroundContainer hide">
         <div id="gamePaused"><h2>GAME PAUSED</h2></div>
         <div id="endGame">
           <div class="innerContainer">
@@ -36,7 +43,7 @@
         </div>
         <div id="playground" class="grid"></div>
       </div>
-      <div class="sidePanel spRight">
+      <div id="sidePanelRight" class="sidePanel spRight hide">
         <div id="nextTetrominoBox" class="sideBox"></div>
         <h4 class="littleBoxTitle">NEXT</h4>
         <h3>Score: <span id="score">0</span></h3>
