@@ -1,0 +1,49 @@
+.playgroundContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  border: 1px solid gray;
+  background-color: rgb(20, 20, 20);
+  flex-shrink: 0;
+}
+
+.grid {
+  margin: 1em;
+  width: calc(var(--columns) * var(--block-width));
+  height: calc(var(--rows) * var(--block-width));
+  border: 3px solid white;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: content-box;
+  flex-shrink: 0;
+}
+
+.playgroundBlock {
+  width: var(--block-width);
+  height: var(--block-width);
+  border: var(--border-width) solid rgba(128, 128, 128, 0.5);
+  background-color: rgb(255, 255, 255);
+  color: antiquewhite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.erasing {
+  animation: colorFlick 0.2s 2;
+}
+
+@keyframes colorFlick {
+  0%,
+  100% {
+    background-color: white;
+  }
+  50% {
+    background-color: black;
+  }
+}
+
+.playgroundBottom {
+  width: var(--block-width);
+}

@@ -1,0 +1,29 @@
+#configPanel {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: none;
+  justify-content: center;
+  flex-direction: column;
+  background-color: grey;
+  text-align: center;
+  width: 200px;
+}
+#configPanel label {
+  padding: 0.4em;
+  text-align: center;
+}
+
+#configPanel input {
+  padding: 0.4em;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+}
+
+#configPanel h3 {
+  background-color: salmon;
+  margin: 0;
+  padding: 1em;
+  width: 100%;
+}

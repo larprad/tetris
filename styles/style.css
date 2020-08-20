@@ -1,3 +1,9 @@
+@import './reset.css';
+@import './sidepanel.css';
+@import './playground.css';
+@import './configTEMP.css';
+@import './tetromino.css';
+
 html {
   --columns: 10;
   --rows: 20;
@@ -6,7 +12,7 @@ html {
 }
 
 body {
-  /* background-color: black; */
+  background-color: black;
   background: url('https://cutewallpaper.org/21/space-1080/Download-wallpaper-1920x1080-stars,-space,-galaxy-full-hd-.jpg');
   background-repeat: repeat;
   background-size: cover;
@@ -19,7 +25,7 @@ body {
 }
 
 h1 {
-  font-size: 4em;
+  font-size: 3em;
   margin: 1em;
 }
 
@@ -35,20 +41,7 @@ h3 {
 
 button {
   margin-top: 1em;
-  width: 70%;
-}
-
-.playgroundContainer {
-  position: relative;
-  min-width: 60%;
-  min-width: 720px;
-  /* min-height: 400px; */
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  border: 1px solid gray;
-  background-color: rgb(20, 20, 20);
-  flex-shrink: 0;
+  width: 100%;
 }
 
 #gamePaused {
@@ -85,152 +78,9 @@ button {
   font-size: 2.5em;
 }
 
-.grid {
-  margin: 1em;
-  width: calc(var(--columns) * var(--block-width));
-  height: calc(var(--rows) * var(--block-width));
-  border: 3px solid white;
-  display: flex;
-  flex-wrap: wrap;
-  box-sizing: content-box;
-  flex-shrink: 0;
-}
-
-.playgroundBlock {
-  width: var(--block-width);
-  height: var(--block-width);
-  border: var(--border-width) solid rgba(128, 128, 128, 0.5);
-  background-color: rgb(255, 255, 255);
-  color: antiquewhite;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.erasing {
-  animation: colorFlick 0.2s 2;
-}
-
-@keyframes colorFlick {
-  0%,
-  100% {
-    background-color: white;
-  }
-  50% {
-    background-color: black;
-  }
-}
-
-.playgroundBottom {
-  width: var(--block-width);
-}
-
-#configPanel {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  display: flex;
-  display: none;
-  justify-content: center;
-  flex-direction: column;
-  background-color: grey;
-  text-align: center;
-  width: 200px;
-}
-
-.instructionBox {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  text-align: left;
-  width: 200px;
-  border: 1px dashed salmon;
-  opacity: 0.5;
-}
-
-.instructionBox p {
-  padding: 0.5em;
-}
-
-.instructionBox h3 {
-  text-align: center;
-}
-
-#configPanel label {
-  padding: 0.4em;
-  text-align: center;
-}
-
-#configPanel input {
-  padding: 0.4em;
-  font-size: 1.5em;
-  font-weight: bold;
-  text-align: center;
-}
-
-#configPanel h3 {
-  background-color: salmon;
-  margin: 0;
-  padding: 1em;
-  width: 100%;
-}
-
 .mainContainer {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: stretch;
-}
-
-.sidePanel {
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  margin-left: 1em;
-  border: 1px solid gray;
-  background-color: rgb(20, 20, 20);
-  flex-direction: column;
-}
-
-#nextTetrominoBox {
-  margin: 1em;
-  width: calc(4 * var(--block-width));
-  height: calc(4 * var(--block-width));
-  border: 3px solid white;
-  display: flex;
-  flex-wrap: wrap;
-  box-sizing: content-box;
-  flex-shrink: 0;
-}
-
-.tetromino {
-  background-color: salmon;
-}
-
-.colorT0 {
-  background-color: #51f0f1;
-}
-
-.colorT1 {
-  background-color: #1a0ef4;
-}
-
-.colorT2 {
-  background-color: #e99f00;
-}
-
-.colorT3 {
-  background-color: #efef00;
-}
-
-.colorT4 {
-  background-color: #4cf000;
-}
-
-.colorT5 {
-  background-color: #e60000;
-}
-
-.colorT6 {
-  background-color: #9b08f4;
 }

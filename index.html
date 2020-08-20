@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <script src="./main.js" defer></script>
-    <link rel="stylesheet" href="./styles/reset.css" />
     <link rel="stylesheet" href="./styles/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="favico.ico" type="image/x-icon" />
@@ -12,6 +11,21 @@
   <body>
     <h1>TETRIS</h1>
     <div class="mainContainer">
+      <div class="sidePanel spLeft">
+        <div id="savedTetrominoBox" class="sideBox"></div>
+        <h4 class="littleBoxTitle">SAVED</h4>
+        <div class="instructionBox">
+          <h3>Controls</h3>
+          <p>Move block</p>
+          <p>← ↓ →</p>
+          <p>Rotate Left</p>
+          <p>A</p>
+          <p>Rotate Right</p>
+          <p>Z</p>
+          <p>Save tetromino</p>
+          <p>E</p>
+        </div>
+      </div>
       <div class="playgroundContainer">
         <div id="gamePaused"><h2>GAME PAUSED</h2></div>
         <div id="endGame">
@@ -22,18 +36,12 @@
         </div>
         <div id="playground" class="grid"></div>
       </div>
-      <div class="sidePanel">
-        <div id="nextTetrominoBox"></div>
-
+      <div class="sidePanel spRight">
+        <div id="nextTetrominoBox" class="sideBox"></div>
+        <h4 class="littleBoxTitle">NEXT</h4>
         <h3>Score: <span id="score">0</span></h3>
         <button id="startButton">Start Game</button>
         <button id="resetButton">Reset Game</button>
-        <!-- <div class="instructionBox">
-          <h3>Controls</h3>
-          <p>Move block: ← ↓ →</p>
-          <p>Rotate Left: A</p>
-          <p>Rotate Right: Z</p>
-        </div> -->
       </div>
       <div id="configPanel">
         <h3>Configuration</h3>
