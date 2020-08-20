@@ -8,7 +8,7 @@
 // IMPORTS //
 /////////////
 
-import { game } from './modules/game';
+import { menu } from './modules/menu';
 
 //---------------------------------------------------------
 
@@ -16,6 +16,6 @@ import { game } from './modules/game';
 // INIT SCRIPTS //
 //////////////////
 
-game.init();
+document.getElementById('enduranceMode').addEventListener('click', () => menu.enduranceMode());
 
 //---------------------------------------------------------

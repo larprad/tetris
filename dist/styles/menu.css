@@ -1,0 +1,11 @@
+.mainMenu {
+  border: 1px solid gray;
+  background-color: rgb(20, 20, 20);
+  width: 100%;
+  padding: 2em;
+}
+
+.gameMode {
+  font-size: 2em;
+  margin: 1em 0;
+}

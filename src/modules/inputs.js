@@ -41,20 +41,45 @@ export const inputs = {
       }
     }
   },
-  initListener() {
-    document
-      .getElementById('configPanel')
-      .addEventListener('change', () => playground.handleConfigUpdate());
-    document.getElementById('resetButton').addEventListener('click', () => game.reset());
-    document.getElementById('startButton').addEventListener('click', () => game.start());
-    document.addEventListener('keydown', this.handleKeyPress.bind(this));
+  handleStart() {
+    game.start();
   },
-  removeListener() {
-    document
-      .getElementById('configPanel')
-      .removeEventListener('change', () => playground.handleConfigUpdate());
-    document.getElementById('resetButton').removeEventListener('click', () => game.reset());
-    document.getElementById('startButton').removeEventListener('click', () => game.start());
-    document.removeEventListener('keydown', this.handleKeyPress);
+  handleReset() {
+    game.reset();
   },
+  handleBackMenu() {
+    game.backMenu();
+  },
+  handleStart() {
+    game.start();
+  },
+  setListener(bool) {
+    if (bool) {
+      console.log('setting event listeners');
+      // document
+      //   .getElementById('configPanel')
+      //   .addEventListener('change', () => playground.handleConfigUpdate());
+      document.getElementById('resetButton').addEventListener('click', this.handleReset);
+      document.getElementById('startButton').addEventListener('click', this.handleStart);
+      document.getElementById('backMenu').addEventListener('click', this.handleBackMenu);
+      document.addEventListener('keydown', this.handleKeyPress.bind(this));
+    } else {
+      console.log('removing event listeners');
+      // document
+      //   .getElementById('configPanel')
+      //   .removeEventListener('change', () => playground.handleConfigUpdate());
+      document.getElementById('resetButton').removeEventListener('click', this.handleReset);
+      document.getElementById('startButton').removeEventListener('click', this.handleReset);
+      document.getElementById('backMenu').removeEventListener('click', this.handleReset);
+      document.removeEventListener('keydown', this.handleKeyPress.bind(this));
+    }
+  },
+  // removeListener() {
+  //   document
+  //     .getElementById('configPanel')
+  //     .removeEventListener('change', () => playground.handleConfigUpdate());
+  //   document.getElementById('resetButton').removeEventListener('click', () => game.reset());
+  //   document.getElementById('startButton').removeEventListener('click', () => game.start());
+  //   document.removeEventListener('keydown', this.handleKeyPress);
+  // },
 };

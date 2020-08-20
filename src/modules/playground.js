@@ -57,21 +57,27 @@ export const playground = {
     this.generatePreviewGrid();
     this.generateSavedGrid();
   },
-
   cleanPreviewGrid() {
     this.preview.forEach((index) => (index.className = 'playgroundBlock'));
   },
   cleanSavedGrid() {
     this.saved.forEach((index) => (index.className = 'playgroundBlock'));
   },
-  cleanPlaygroundGrid() {
-    const playgroundToClean = document.getElementById('playground');
+  removeGrid(id) {
+    const playgroundToClean = document.getElementById(id);
     while (playgroundToClean.firstChild) {
       playgroundToClean.removeChild(playgroundToClean.firstChild);
     }
   },
+  removeAllGrid() {
+    console.log('removing all grids');
+    this.removeGrid('nextTetrominoBox');
+    this.removeGrid('savedTetrominoBox');
+    this.removeGrid('playground');
+  },
   cleanAllGrid() {
-    this.cleanPlaygroundGrid();
+    console.log('cleaning all grids');
+    this.removeGrid('playground');
     this.cleanPreviewGrid();
     this.cleanSavedGrid();
   },
@@ -80,7 +86,7 @@ export const playground = {
     const haveRowsAndColumnsChanged = configPanel.updateGameConfiguration();
     console.log(haveRowsAndColumnsChanged);
     if (haveRowsAndColumnsChanged) {
-      this.cleanPlaygroundGrid();
+      this.removePlaygroundGrid();
       this.generatePlaygroundGrid();
     }
   },

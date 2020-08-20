@@ -3,42 +3,47 @@ import { tetromino } from './tetrominoes';
 import { display } from './display';
 import { playground } from './playground';
 import { inputs } from './inputs';
+import { menu } from './menu';
 
 export const game = {
   gameScore: 0,
   timerId: 0,
   gameStatut: 'notStarted',
+  gameMode: '',
   init() {
-    configPanel.displayInitialConfiguration();
-    configPanel.enableDisplay(true);
+    // configPanel.displayInitialConfiguration();
+    // configPanel.enableDisplay(true);
     playground.generateAllGrid();
     tetromino.initSaved();
-    inputs.initListener();
+    inputs.setListener(true);
+    console.log('game statut from init', this.gameStatut);
   },
-  // restore() {
-  //   playground.cleanAllGrid();
-  //   playground.generateAllGrid();
-  //   this.gameScore = 0;
-  //   this.updateScore(0);
-  //   display.endGame(false);
-  //   display.pause(false);
-  //   configPanel.enableDisplay(false);
-  //   clearInterval(this.timerId);
-  // },
+  quit() {
+    this.restore();
+    playground.removeAllGrid();
+    document.getElementById('startButton').innerHTML = 'Start Game';
+    inputs.setListener(false);
+  },
+  restore() {
+    console.log('restoring game');
+    this.gameScore = 0;
+    this.updateScore(0);
+    this.gameStatut = 'notStarted';
+    display.endGame(false);
+    display.pause(false);
+    playground.deletingAnimation = 'init';
+    clearInterval(this.timerId);
+  },
   start() {
     if (this.gameStatut === 'lost') {
       this.reset();
     }
     if (this.gameStatut === 'notStarted') {
       console.log('new game is starting');
-      this.gameScore = 0;
-      this.updateScore(0);
-      display.endGame(false);
-      configPanel.enableDisplay(false);
       tetromino.drawNew();
     }
     if (this.gameStatut === 'pause' || this.gameStatut === 'notStarted') {
-      this.timerId = setInterval(this.gameActive.bind(this), init.speed);
+      this.timerId = setInterval(this.run.bind(this), init.speed);
       document.getElementById('startButton').innerHTML = 'Pause Game';
       display.pause(false);
       this.gameStatut = 'play';
@@ -54,27 +59,23 @@ export const game = {
     clearInterval(this.timerId);
   },
   reset() {
+    console.log('reseting game');
     playground.cleanAllGrid();
     playground.generatePlaygroundGrid();
-    tetromino.initTetromino();
+    this.restore();
     tetromino.initSaved();
-    clearInterval(this.timerId);
-    display.pause(false);
-    display.endGame(false);
     this.gameStatut = 'notStarted';
-    playground.deletingAnimation = 'init';
-    configPanel.enableDisplay(true);
-    this.gameScore = 0;
-    this.updateScore(0);
+    // configPanel.enableDisplay(true);
     document.getElementById('startButton').innerHTML = 'Start Game';
     console.log('game have been reseted');
   },
+  backMenu() {
+    this.quit();
+    menu.showMenu();
+  },
   saveTetromino() {
-    //if a tetromino have been saved already
-
     if (tetromino.canBeSaved) {
       if (tetromino.saved.tetromino.length > 0) {
-        console.log('Swwwwitch');
         tetromino.undraw();
         tetromino.switchSaved();
         tetromino.drawSaved();
@@ -87,7 +88,7 @@ export const game = {
         tetromino.drawNew();
       }
     } else {
-      console.log('already saved one tetromino');
+      console.log('already saved one tetromino wait for next');
     }
   },
   updateScore(lines) {
@@ -95,7 +96,7 @@ export const game = {
     this.gameScore += addedScore;
     document.getElementById('score').innerHTML = this.gameScore;
   },
-  gameActive() {
+  run() {
     if (playground.deletingAnimation === 'onGoing') {
       // animation onGoing, nothing will happen
       return;

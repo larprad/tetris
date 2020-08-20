@@ -1,6 +1,6 @@
 export const init = {
   blockSize: 30,
-  rows: 18,
+  rows: 20,
   columns: 10,
   speed: 400,
   devMode: false,
