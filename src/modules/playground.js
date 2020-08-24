@@ -1,4 +1,4 @@
-import { init, configPanel } from './config';
+import { init } from './config';
 
 export const playground = {
   blocks: [],
@@ -80,15 +80,6 @@ export const playground = {
     this.removeGrid('playground');
     this.cleanPreviewGrid();
     this.cleanSavedGrid();
-  },
-  handleConfigUpdate() {
-    console.log('update configuration');
-    const haveRowsAndColumnsChanged = configPanel.updateGameConfiguration();
-    console.log(haveRowsAndColumnsChanged);
-    if (haveRowsAndColumnsChanged) {
-      this.removePlaygroundGrid();
-      this.generatePlaygroundGrid();
-    }
   },
   lineIsMade() {
     let checkLine = [];

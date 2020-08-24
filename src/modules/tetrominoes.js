@@ -174,6 +174,13 @@ export const tetromino = {
     this.position += init.columns;
     this.draw();
   },
+  smackDown() {
+    this.undraw();
+    while (!this.freeze()) {
+      this.position += init.columns;
+    }
+    this.draw();
+  },
   moveLeft() {
     const isAtLeftEdge = this.current.some((index) => {
       return (index + this.position) % init.columns === 0;

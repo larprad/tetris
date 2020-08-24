@@ -1,11 +1,19 @@
 .sidePanel {
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
 
   padding: 1em;
   border: 1px solid gray;
   background-color: rgb(20, 20, 20);
+  flex-direction: column;
+}
+
+.sidePanelContainer {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
   flex-direction: column;
 }
 
@@ -27,9 +35,21 @@
   height: calc(4 * var(--block-width));
   border: 3px solid white;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   box-sizing: content-box;
   flex-shrink: 0;
+}
+
+.score {
+  margin-top: 1em;
+  height: calc(2 * var(--block-width));
+}
+
+.speed {
+  height: calc(2 * var(--block-width));
+  margin-top: 1em;
 }
 
 .littleBoxTitle {
@@ -48,9 +68,8 @@
   justify-content: center;
   align-items: center;
   border: 1px dashed rgb(133, 133, 133);
-  margin-top: 3em;
+  margin-top: 1em;
   width: 100%;
-  font-size: 0.8em;
 }
 
 .instructionBox h3 {
@@ -64,6 +83,7 @@
 }
 
 .instructionBox p {
+  font-size: 0.8em;
   padding: 0.3em;
   margin-bottom: 0.2em;
 }

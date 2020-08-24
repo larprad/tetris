@@ -62,6 +62,15 @@ button {
   background-color: gray;
 }
 
+.titleImage {
+  margin: 2em;
+}
+
+.titleImage img {
+  object-fit: contain;
+  height: 4em;
+}
+
 #endGame {
   display: none;
   justify-content: center;
