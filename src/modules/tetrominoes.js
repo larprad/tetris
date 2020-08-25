@@ -106,6 +106,7 @@ export const tetromino = {
     this.number = wasSaved.number;
     this.rotation = wasSaved.rotation;
     this.current = this.theTetrominoes[this.number][this.rotation];
+    this.position = Math.floor(init.columns / 2 - 1);
     this.canBeSaved = false;
   },
   rotateTetromino(direction) {

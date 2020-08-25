@@ -28,11 +28,13 @@ export const display = {
     document.getElementById('speed').innerHTML = game.speed.toString();
     document.getElementById('timer').innerHTML = Math.floor(timer.value);
   },
-  endGame(bool) {
+  endGame(bool, title = 'GAME OVER', score, unit) {
     const displayValue = bool ? 'flex' : 'none';
     document.getElementById('endGame').style.display = displayValue;
     if (bool) {
-      document.getElementById('finalScore').innerHTML = game.gameScore;
+      document.getElementById('endGameTitle').innerHTML = title;
+      score >= 0 ? (document.getElementById('finalScore').innerHTML = score) : null;
+      unit ? (document.getElementById('scoreUnit').innerHTML = unit) : null;
     }
   },
   pause(bool) {

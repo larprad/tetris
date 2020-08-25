@@ -13,20 +13,33 @@
     <!-- <h1>TETRIS</h1> -->
     <div class="mainContainer">
       <div id="mainMenu" class="mainMenu">
-        <button id="enduranceMode" class="gameMode">Enduro</button>
-        <button id="rushMode" class="gameMode">Rush</button>
-        <button class="gameMode" disabled>Sprint</button>
-        <button class="gameMode" disabled>Leaderboard</button>
+        <div class="menuButtonContainer">
+          <button id="enduranceMode" class="gameMode">Enduro</button>
+          <div class="menuButtonDescription"><p>No time limit, do your best!</p></div>
+        </div>
+        <div class="menuButtonContainer">
+          <button id="rushMode" class="gameMode">Rush</button>
+          <div class="menuButtonDescription"><p>60s rush to get points</p></div>
+        </div>
+
+        <div class="menuButtonContainer">
+          <button id="sprintMode" class="gameMode">Sprint</button>
+          <div class="menuButtonDescription"><p>Make 20 lines. Fast.</p></div>
+        </div>
+
+        <div class="menuButtonContainer">
+          <button class="gameMode" disabled>Leaderboard</button>
+        </div>
       </div>
       <div id="sidePanelLeft" class="sidePanel spLeft hide">
         <div class="sidePanelContainer">
           <div id="savedTetrominoBox" class="sideBox"></div>
           <h4 class="littleBoxTitle">SAVED</h4>
 
-          <div class="sideBox score">
-            <h3><span id="timer">0</span></h3>
+          <div id="timerBox" class="sideBox score">
+            <h3 class="big"><span id="timer">0</span></h3>
           </div>
-          <h4 class="littleBoxTitle">TIMER</h4>
+          <h4 id="timerTitle" class="littleBoxTitle">TIMER</h4>
           <div class="instructionBox">
             <h3>Controls</h3>
             <p>Move block</p>
@@ -45,8 +58,8 @@
         <div id="gamePaused"><h2>GAME PAUSED</h2></div>
         <div id="endGame">
           <div class="innerContainer">
-            <h2>GAME OVER</h2>
-            <h3>Score: <span id="finalScore">0</span></h3>
+            <h2 id="endGameTitle">GAME OVER</h2>
+            <h3><span id="finalScore"></span> <span id="scoreUnit"></span></h3>
           </div>
         </div>
         <div id="playground" class="grid"></div>
@@ -56,17 +69,17 @@
           <div id="nextTetrominoBox" class="sideBox"></div>
           <h4 class="littleBoxTitle">NEXT</h4>
           <div class="sideBox speed">
-            <h3><span id="speed">0</span></h3>
+            <h3 class="big"><span id="speed">0</span></h3>
           </div>
           <h4 class="littleBoxTitle">SPEED</h4>
           <div class="sideBox score">
             <h3><span id="lines">0</span></h3>
           </div>
           <h4 class="littleBoxTitle">LINES</h4>
-          <div class="sideBox score">
+          <div id="scoreBox" class="sideBox score">
             <h3><span id="score">0</span></h3>
           </div>
-          <h4 class="littleBoxTitle">SCORE</h4>
+          <h4 id="scoreTitle" class="littleBoxTitle">SCORE</h4>
         </div>
 
         <div class="sidePanelContainer">

@@ -22,4 +22,11 @@ export const menu = {
     game.gameMode = 'rush';
     game.init();
   },
+  sprintMode() {
+    this.showMenu(false);
+    display.mainMenu(false);
+    display.playgroundPanel(true);
+    game.gameMode = 'sprint';
+    game.init();
+  },
 };

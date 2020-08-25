@@ -28,9 +28,7 @@ export const game = {
     console.log('restoring game');
     this.gameScore = 0;
     this.lines = 0;
-    this.speed = init.gameMode[this.gameMode].initSpeed;
-    timer.value = init.gameMode[this.gameMode].initTimer;
-    timer.reset();
+    init.gameMode[this.gameMode].init();
     this.updateScore(0);
     this.gameStatut = 'notStarted';
     display.endGame(false);
@@ -41,7 +39,7 @@ export const game = {
     clearInterval(this.timerId);
   },
   start() {
-    if (this.gameStatut === 'lost') {
+    if (this.gameStatut === 'lost' || this.gameStatut === 'end') {
       this.reset();
     }
     if (this.gameStatut === 'notStarted') {
@@ -51,10 +49,7 @@ export const game = {
     if (this.gameStatut === 'pause' || this.gameStatut === 'notStarted') {
       this.timerId = setInterval(this.run.bind(this), init.speedArray[this.speed - 1]);
       console.log('game mode', this.gameMode);
-      if (this.gameMode === 'rush') {
-        timer.decrement();
-        timer.display();
-      }
+      init.gameMode[this.gameMode].start();
       document.getElementById('startButton').innerHTML = 'Pause Game';
       display.pause(false);
       this.gameStatut = 'play';
@@ -66,7 +61,7 @@ export const game = {
   pause() {
     this.gameStatut = 'pause';
     display.pause(true);
-    this.gameMode === 'rush' ? timer.pause() : null;
+    init.gameMode[this.gameMode].pause();
     document.getElementById('startButton').innerHTML = 'Resume';
     clearInterval(this.timerId);
   },
@@ -108,10 +103,10 @@ export const game = {
     document.getElementById('score').innerHTML = this.gameScore;
     document.getElementById('lines').innerHTML = this.lines;
   },
-  increaseSpeed() {
+  increaseSpeed(value) {
     console.log('increasing speed');
     clearInterval(this.timerId);
-    this.speed++;
+    this.speed += value;
     this.timerId = setInterval(this.run.bind(this), init.speedArray[this.speed - 1]);
     document.getElementById('speed').innerHTML = this.speed;
   },
@@ -120,18 +115,14 @@ export const game = {
       // animation onGoing, nothing will happen
       return;
     }
+    if (init.gameMode[this.gameMode].end()) {
+      init.gameMode[this.gameMode].displayScore();
+      return;
+    }
     const lineToDelete = playground.lineIsMade();
     const tetrominoTouchDown = tetromino.freeze();
     if (tetrominoTouchDown && lineToDelete.length && playground.deletingAnimation !== 'done') {
-      if (this.gameMode === 'enduro') {
-        const speedShouldIncrease = lineToDelete.some((x, index) => {
-          return (this.lines + index + 1) % 10 === 0 && this.lines > 0;
-        });
-        if (speedShouldIncrease) {
-          console.log('10 lines have been made, speed is increasing');
-          this.increaseSpeed();
-        }
-      }
+      init.gameMode[this.gameMode].lineCheck(lineToDelete);
       this.lines += lineToDelete.length;
       this.updateScore();
       playground.animateDeleteLine(lineToDelete);
@@ -147,18 +138,23 @@ export const game = {
       tetromino.drawNew();
       const lose = this.loseCondition();
       if (lose) {
-        clearInterval(this.timerId);
+        this.stop();
         this.gameStatut = 'lost';
-        document.getElementById('startButton').innerHTML = 'Restart';
         console.log('GAME LOST');
-        if (this.gameMode === 'rush' || this.gameMode === 'sprint') {
+        if (this.gameMode === 'enduro') {
+          display.endGame(true, 'GAME END', this.gameScore, 'points');
+        } else {
+          display.endGame(true, 'GAME OVER', null);
           timer.pause();
         }
-        display.endGame(true);
       }
     } else {
       tetromino.moveDown();
     }
+  },
+  stop() {
+    clearInterval(this.timerId);
+    document.getElementById('startButton').innerHTML = 'Restart';
   },
   loseCondition() {
     const gameLost = tetromino.current.some((index) => {
