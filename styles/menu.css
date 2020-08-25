@@ -7,5 +7,25 @@
 
 .gameMode {
   font-size: 2em;
+  margin: 0;
+  width: 60%;
+}
+
+.menuButtonContainer {
   margin: 1em 0;
+  width: 100%;
+  display: flex;
+  align-content: stretch;
+  justify-content: space-between;
+}
+
+.menuButtonDescription {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+}
+
+.menuButtonDescription p {
 }
