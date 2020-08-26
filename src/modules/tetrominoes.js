@@ -94,6 +94,7 @@ export const tetromino = {
     this.current = this.theTetrominoes[this.number][this.rotation];
   },
   saveTetromino() {
+    console.log('saving tetromino');
     this.saved = {
       number: this.number,
       rotation: this.rotation,
@@ -132,6 +133,7 @@ export const tetromino = {
     if (willTouchLimits || (isAtRightEdge && isAtLeftEdge)) {
       console.log('rotation not possible due to boudaries conflict');
     } else {
+      console.log('rotating tetromino to the ' + direction);
       this.undraw();
       this.current = tempTetromino;
       this.rotation = tempRotationIndex;
@@ -176,6 +178,7 @@ export const tetromino = {
     this.draw();
   },
   smackDown() {
+    console.log('smack tetromino down');
     this.undraw();
     while (!this.freeze()) {
       this.position += init.columns;
@@ -187,6 +190,7 @@ export const tetromino = {
       return (index + this.position) % init.columns === 0;
     });
     if (!isAtLeftEdge && !this.lateralBlock('left')) {
+      console.log('moving tetromino left');
       this.undraw();
       this.position--;
       this.draw();
@@ -199,6 +203,7 @@ export const tetromino = {
       return;
     }
     if (!this.freeze()) {
+      console.log('moving tetromino down');
       this.undraw();
       this.position += init.columns;
       this.draw();
@@ -211,6 +216,7 @@ export const tetromino = {
       return (index + this.position + 1) % init.columns === 0;
     });
     if (!isAtRightEdge && !this.lateralBlock('right')) {
+      console.log('moving tetromino right');
       this.undraw();
       this.position++;
       this.draw();

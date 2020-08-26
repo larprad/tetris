@@ -4,7 +4,20 @@ export const playground = {
   blocks: [],
   preview: [],
   deletingAnimation: 'init',
+  setBlockWidth() {
+    const width = document.documentElement.clientWidth || document.body.clientWidth;
+
+    const tempBlockSize = Math.floor(width / (init.columns * 2.6));
+    if (tempBlockSize > init.maxBlockSize) {
+      init.blockSize = init.maxBlockSize;
+    } else if (tempBlockSize < init.minBlockSize) {
+      init.blockSize = init.minBlockSize;
+    } else {
+      init.blockSize = tempBlockSize;
+    }
+  },
   generatePlaygroundGrid() {
+    this.setBlockWidth();
     console.log('generating playground blocks');
     const playground = document.getElementById('playground');
     const root = document.querySelector('html');

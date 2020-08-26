@@ -21,7 +21,7 @@ export const game = {
   quit() {
     this.restore();
     playground.removeAllGrid();
-    document.getElementById('startButton').innerHTML = 'Start Game';
+    document.getElementById('startButton').innerHTML = 'Start';
     inputs.setListener(false);
   },
   restore() {
@@ -50,7 +50,7 @@ export const game = {
       this.timerId = setInterval(this.run.bind(this), init.speedArray[this.speed - 1]);
       console.log('game mode', this.gameMode);
       init.gameMode[this.gameMode].start();
-      document.getElementById('startButton').innerHTML = 'Pause Game';
+      document.getElementById('startButton').innerHTML = 'Pause';
       display.pause(false);
       this.gameStatut = 'play';
     } else {
@@ -72,7 +72,7 @@ export const game = {
     this.restore();
     tetromino.initSaved();
     this.gameStatut = 'notStarted';
-    document.getElementById('startButton').innerHTML = 'Start Game';
+    document.getElementById('startButton').innerHTML = 'Start';
     console.log('game have been reseted');
   },
   backMenu() {
@@ -144,7 +144,7 @@ export const game = {
         if (this.gameMode === 'enduro') {
           display.endGame(true, 'GAME END', this.gameScore, 'points');
         } else {
-          display.endGame(true, 'GAME OVER', null);
+          display.endGame(true, 'GAME OVER', ' ', ' ');
           timer.pause();
         }
       }

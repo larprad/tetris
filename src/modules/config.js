@@ -4,6 +4,8 @@ import { display } from './display';
 
 export const init = {
   blockSize: 25,
+  maxBlockSize: 32,
+  minBlockSize: 12,
   rows: 20,
   columns: 10,
   timerCountPrecision: 10, // one tick each centisecond
@@ -28,7 +30,9 @@ export const init = {
   devMode: false,
   deletionAnimationSpeed: 500,
   previewSize: 4,
-
+  detectDevice() {
+    return !!navigator.maxTouchPoints ? 'mobile' : 'computer';
+  },
   gameMode: {
     enduro: {
       increaseSpeedValue: 1,

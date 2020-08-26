@@ -41,4 +41,9 @@ export const display = {
     const displayValue = bool ? 'block' : 'none';
     document.getElementById('gamePaused').style.display = displayValue;
   },
+  // touchControl(bool) {
+  //   if(bool) {
+  //     document.getElementById('touchControlContainer').classList.add('remo')
+  //   }
+  // }
 };

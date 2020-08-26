@@ -4,6 +4,7 @@
 @import './configTEMP.css';
 @import './tetromino.css';
 @import './menu.css';
+@import './touch.css';
 
 html {
   --columns: 10;
@@ -13,6 +14,8 @@ html {
 }
 
 body {
+  position: relative;
+  /* height: 100vh; */
   background-color: black;
   background: url('https://cutewallpaper.org/21/space-1080/Download-wallpaper-1920x1080-stars,-space,-galaxy-full-hd-.jpg');
   background-repeat: repeat;
@@ -20,9 +23,11 @@ body {
   color: white;
   font-family: sans-serif;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   flex-direction: column;
+  user-select: none;
+  -webkit-touch-callout: none;
 }
 
 h1 {
@@ -46,6 +51,17 @@ button {
   width: 100%;
   padding: 0.2em 0;
   cursor: pointer;
+  font-size: 1em;
+  outline: 0;
+  outline: none !important;
+}
+
+button:focus {
+  outline: 0;
+}
+
+button:active {
+  outline: 0;
 }
 
 .hide {
@@ -105,4 +121,16 @@ button {
   display: flex;
   justify-content: center;
   align-items: stretch;
+}
+
+@media screen and (max-device-width: 640px) {
+  body {
+    font-size: 12px;
+  }
+  .instructionBox {
+    display: none;
+  }
+  #touchControlContainer {
+    display: flex;
+  }
 }
