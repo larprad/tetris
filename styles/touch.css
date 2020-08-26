@@ -1,0 +1,83 @@
+#touchControlContainer {
+  position: absolute;
+  bottom: -250px;
+  left: 0;
+  width: 100vw;
+  height: 250px;
+  /* background-color: rgba(255, 255, 240, 0.5); */
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.controlBlock {
+  padding: 1em;
+  display: grid;
+  height: 180px;
+  width: 180px;
+  background-color: rgba(255, 255, 255, 0.3);
+  /* border: 1px solid black; */
+}
+
+.controlContainerLeft {
+  grid-template-areas:
+    '. upArrow .'
+    'leftArrow middlePad rightArrow'
+    '. downArrow .';
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  border-top-right-radius: 2em;
+  border-bottom-right-radius: 2em;
+}
+
+.controlContainerRight {
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  border-top-left-radius: 2em;
+  border-bottom-left-radius: 2em;
+}
+
+.controlArrowContainer {
+  margin: -0.1em;
+}
+
+.controlButtonContainer {
+  margin: 0em;
+  padding: 0.8em;
+}
+
+.controlButton {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 0.5em;
+  font-size: 2em;
+}
+
+.controlUp {
+  grid-area: upArrow;
+}
+
+.controlLeft {
+  grid-area: leftArrow;
+}
+
+.controlRight {
+  grid-area: rightArrow;
+}
+
+.controlDown {
+  grid-area: downArrow;
+}
+
+.controlMiddle {
+  grid-area: middlePad;
+  background-color: rgba(255, 255, 255, 0.603);
+  border-radius: 50%;
+  margin: 0.3em;
+}
+
+.round {
+  border-radius: 50%;
+}
