@@ -5,7 +5,7 @@ export let sounds = {
   move: new Audio('./sound/samples/move.mp3'),
   rotate: new Audio('./sound/samples/rotate.mp3'),
   smack: new Audio('./sound/samples/shift.mp3'),
-  pause: new Audio('./sound/samples/pause.mp3'),
+  pauseSound: new Audio('./sound/samples/pause.mp3'),
   justSmashed: false,
   playingTheme: 0,
   toggleSmash() {

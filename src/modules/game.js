@@ -50,7 +50,6 @@ export const game = {
       tetromino.drawNew();
     }
     if (this.gameStatut === 'pause' || this.gameStatut === 'notStarted') {
-      // this.gameStatut === 'pause' ? sounds.play(sounds.pause) : null;
       sounds.playSong(sounds.playingTheme);
 
       this.timerId = setInterval(this.run.bind(this), init.speedArray[this.speed - 1]);
@@ -66,7 +65,7 @@ export const game = {
   },
   pause() {
     sounds.pause(sounds.playingTheme);
-    sounds.play(sounds.pause);
+    sounds.play(sounds.pauseSound);
     this.gameStatut = 'pause';
     display.pause(true);
     init.gameMode[this.gameMode].pause();
