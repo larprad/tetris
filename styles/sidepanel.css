@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
 
-  padding: 1em;
+  padding: 0.8em;
   border: 1px solid gray;
   background-color: rgb(20, 20, 20);
   flex-direction: column;
@@ -18,11 +18,11 @@
 }
 
 .spRight {
-  margin-left: 1em;
+  margin-left: 0.8em;
 }
 
 .spLeft {
-  margin-right: 1em;
+  margin-right: 0.8em;
 }
 
 .sideBox {
@@ -30,12 +30,15 @@
   width: calc(4 * var(--block-width));
   height: calc(4 * var(--block-width));
   border: 3px solid white;
+  background-color: black;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   box-sizing: content-box;
   flex-shrink: 0;
+  transition: background-color 0.2s;
+  transition: border 0.2s;
 }
 
 .sideBox h3 {

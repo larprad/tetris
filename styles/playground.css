@@ -9,7 +9,7 @@
 }
 
 .grid {
-  margin: 1em;
+  margin: 0.8em;
   width: calc(var(--columns) * var(--block-width));
   height: calc(var(--rows) * var(--block-width));
   border: 3px solid white;
@@ -17,6 +17,8 @@
   flex-wrap: wrap;
   box-sizing: content-box;
   flex-shrink: 0;
+  transition: background-color 0.2s;
+  transition: border 0.2s;
 }
 
 .playgroundBlock {
