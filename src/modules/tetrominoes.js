@@ -1,6 +1,7 @@
 import { init } from './config';
 import { playground } from './playground';
 import { game } from './game';
+import { sounds } from './audio';
 
 export const tetromino = {
   number: 0,
@@ -8,6 +9,7 @@ export const tetromino = {
   rotation: 0,
   current: [],
   canBeSaved: true,
+  canMoveDown: true,
   saved: {},
   next: {},
   theTetrominoes: [],
@@ -87,6 +89,7 @@ export const tetromino = {
     this.rotation = this.next.rotation;
     this.position = Math.floor(init.columns / 2 - 1);
     this.canBeSaved = true;
+    this.canMoveDown = true;
 
     this.initPreview();
 
@@ -133,6 +136,7 @@ export const tetromino = {
     if (willTouchLimits || (isAtRightEdge && isAtLeftEdge)) {
       console.log('rotation not possible due to boudaries conflict');
     } else {
+      sounds.play(sounds.rotate);
       console.log('rotating tetromino to the ' + direction);
       this.undraw();
       this.current = tempTetromino;
@@ -179,11 +183,17 @@ export const tetromino = {
   },
   smackDown() {
     console.log('smack tetromino down');
-    this.undraw();
-    while (!this.freeze()) {
-      this.position += init.columns;
+    if (this.canMoveDown) {
+      this.undraw();
+      while (!this.freeze()) {
+        this.position += init.columns;
+      }
+      sounds.play(sounds.smack);
+      sounds.justSmashed = true;
+      this.draw();
+    } else {
+      console.log(`tetromino can't go deeper than that`);
     }
-    this.draw();
   },
   moveLeft() {
     const isAtLeftEdge = this.current.some((index) => {
@@ -191,6 +201,7 @@ export const tetromino = {
     });
     if (!isAtLeftEdge && !this.lateralBlock('left')) {
       console.log('moving tetromino left');
+      sounds.play(sounds.move);
       this.undraw();
       this.position--;
       this.draw();
@@ -202,12 +213,15 @@ export const tetromino = {
     if (playground.deletingAnimation !== 'init') {
       return;
     }
-    if (!this.freeze()) {
+    if (!this.freeze() && this.canMoveDown) {
       console.log('moving tetromino down');
+      sounds.play(sounds.move);
       this.undraw();
       this.position += init.columns;
       this.draw();
     } else {
+      this.canMoveDown ? sounds.play(sounds.land) : null;
+      this.canMoveDown = false;
       console.log('bottom boudary prevents tetromino movement');
     }
   },
@@ -217,6 +231,7 @@ export const tetromino = {
     });
     if (!isAtRightEdge && !this.lateralBlock('right')) {
       console.log('moving tetromino right');
+      sounds.play(sounds.move);
       this.undraw();
       this.position++;
       this.draw();
@@ -231,6 +246,7 @@ export const tetromino = {
     );
     if (freezeCondition) {
       console.log('TOUCH DOWN! new tetromino in the way');
+      this.canMoveDown = false;
       this.current.forEach((index) => {
         playground.blocks[index + this.position].classList.add('taken');
       });

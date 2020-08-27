@@ -1,11 +1,12 @@
 import { game } from './game';
 import { timer } from './timer';
 import { display } from './display';
+import { sounds } from './audio';
 
 export const init = {
   blockSize: 25,
-  maxBlockSize: 32,
-  minBlockSize: 12,
+  maxBlockSize: 26,
+  minBlockSize: 10,
   rows: 20,
   columns: 10,
   timerCountPrecision: 10, // one tick each centisecond
@@ -47,6 +48,7 @@ export const init = {
       init() {
         game.speed = this.initSpeed;
         this.display();
+        sounds.playingTheme = sounds.theme1;
       },
       start() {
         console.log('start enduro mode');
@@ -89,6 +91,7 @@ export const init = {
         timer.value = this.initTimer;
         timer.pause();
         this.display();
+        sounds.playingTheme = sounds.theme1;
       },
       start() {
         console.log('start rush mode');
@@ -141,6 +144,7 @@ export const init = {
         timer.value = this.initTimer;
         timer.pause();
         this.display();
+        sounds.playingTheme = sounds.theme1;
       },
       start() {
         console.log('start sprint mode');
@@ -176,22 +180,4 @@ export const init = {
       },
     },
   },
-};
-
-export const configPanel = {
-  // updateGameConfiguration() {
-  //   const newRowNumber = document.getElementById('rowNumber');
-  //   const newColumnNumber = document.getElementById('columnNumber');
-  //   const newBlockSize = document.getElementById('blockSize');
-  //   const newSpeed = document.getElementById('blockSpeed');
-  //   const dimUpdate =
-  //     init.rows === parseInt(newRowNumber.value, 10) &&
-  //     init.columns === parseInt(newColumnNumber.value, 10) &&
-  //     init.blockSize === parseInt(newBlockSize.value, 10);
-  //   init.rows = parseInt(newRowNumber.value, 10);
-  //   init.columns = parseInt(newColumnNumber.value, 10);
-  //   init.blockSize = parseInt(newBlockSize.value, 10);
-  //   game.speed = parseInt(newSpeed.value, 10) * 100;
-  //   return !dimUpdate;
-  // },
 };

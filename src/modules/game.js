@@ -5,6 +5,7 @@ import { display } from './display';
 import { playground } from './playground';
 import { inputs } from './inputs';
 import { menu } from './menu';
+import { sounds } from './audio';
 
 export const game = {
   gameScore: 0,
@@ -23,6 +24,7 @@ export const game = {
     playground.removeAllGrid();
     document.getElementById('startButton').innerHTML = 'Start';
     inputs.setListener(false);
+    sounds.stop(sounds.theme1);
   },
   restore() {
     console.log('restoring game');
@@ -44,9 +46,13 @@ export const game = {
     }
     if (this.gameStatut === 'notStarted') {
       console.log('new game is starting');
+      sounds.playSong(sounds.playingTheme);
       tetromino.drawNew();
     }
     if (this.gameStatut === 'pause' || this.gameStatut === 'notStarted') {
+      // this.gameStatut === 'pause' ? sounds.play(sounds.pause) : null;
+      sounds.playSong(sounds.playingTheme);
+
       this.timerId = setInterval(this.run.bind(this), init.speedArray[this.speed - 1]);
       console.log('game mode', this.gameMode);
       init.gameMode[this.gameMode].start();
@@ -59,6 +65,8 @@ export const game = {
     }
   },
   pause() {
+    sounds.pause(sounds.playingTheme);
+    sounds.play(sounds.pause);
     this.gameStatut = 'pause';
     display.pause(true);
     init.gameMode[this.gameMode].pause();
@@ -66,6 +74,7 @@ export const game = {
     clearInterval(this.timerId);
   },
   reset() {
+    sounds.stop(sounds.playingTheme);
     console.log('reseting game');
     playground.cleanAllGrid();
     playground.generatePlaygroundGrid();
@@ -104,6 +113,12 @@ export const game = {
     document.getElementById('lines').innerHTML = this.lines;
   },
   increaseSpeed(value) {
+    document.getElementById('speedBox').classList.add('flash');
+    document.getElementById('playground').classList.add('flash');
+    setTimeout(() => {
+      document.getElementById('speedBox').classList.remove('flash');
+      document.getElementById('playground').classList.remove('flash');
+    }, 500);
     console.log('increasing speed');
     clearInterval(this.timerId);
     this.speed += value;
@@ -116,6 +131,7 @@ export const game = {
       return;
     }
     if (init.gameMode[this.gameMode].end()) {
+      sounds.stop(sounds.playingTheme);
       init.gameMode[this.gameMode].displayScore();
       return;
     }
@@ -133,11 +149,13 @@ export const game = {
       return;
     }
     if (tetrominoTouchDown) {
+      sounds.justSmashed ? sounds.toggleSmash() : sounds.play(sounds.land);
       playground.deleteLine(lineToDelete);
       playground.deletingAnimation = 'init';
       tetromino.drawNew();
       const lose = this.loseCondition();
       if (lose) {
+        sounds.stop(sounds.playingTheme);
         this.stop();
         this.gameStatut = 'lost';
         console.log('GAME LOST');

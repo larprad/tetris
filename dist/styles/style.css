@@ -1,7 +1,6 @@
 @import './reset.css';
 @import './sidepanel.css';
 @import './playground.css';
-@import './configTEMP.css';
 @import './tetromino.css';
 @import './menu.css';
 @import './touch.css';
@@ -15,9 +14,11 @@ html {
 
 body {
   position: relative;
-  /* height: 100vh; */
-  background-color: black;
-  background: url('https://cutewallpaper.org/21/space-1080/Download-wallpaper-1920x1080-stars,-space,-galaxy-full-hd-.jpg');
+  /* height: 80vh; */
+  /* background-color: black; */
+  /* background: url('https://cutewallpaper.org/21/space-1080/Download-wallpaper-1920x1080-stars,-space,-galaxy-full-hd-.jpg'); */
+  background: rgb(172, 123, 145);
+  background: radial-gradient(circle, rgba(172, 123, 145, 1) 0%, rgba(21, 26, 33, 1) 100%);
   background-repeat: repeat;
   background-size: cover;
   color: white;
@@ -123,14 +124,16 @@ button:active {
   align-items: stretch;
 }
 
+.flash {
+  background-color: red;
+  border: 3px solid red;
+}
+
 @media screen and (max-device-width: 640px) {
   body {
     font-size: 12px;
   }
   .instructionBox {
     display: none;
-  }
-  #touchControlContainer {
-    display: flex;
   }
 }
