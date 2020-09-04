@@ -6,6 +6,9 @@ export let sounds = {
   rotate: new Audio('./sound/samples/rotate.mp3'),
   smack: new Audio('./sound/samples/shift.mp3'),
   pauseSound: new Audio('./sound/samples/pause.mp3'),
+  line: new Audio('./sound/samples/line.mp3'),
+  tetris: new Audio('./sound/samples/tetris.mp3'),
+  gameover: new Audio('./sound/samples/gameover.mp3'),
   justSmashed: false,
   playingTheme: 0,
   toggleSmash() {

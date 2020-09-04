@@ -112,14 +112,13 @@ export const tetromino = {
     this.current = this.theTetrominoes[this.number][this.rotation];
     this.position = Math.floor(init.columns / 2 - 1);
     this.canBeSaved = false;
+    this.canMoveDown = true;
   },
   rotateTetromino(direction) {
     let tempRotationIndex = this.rotation;
     direction === 'right' ? tempRotationIndex++ : tempRotationIndex--;
     tempRotationIndex >= this.theTetrominoes[this.number].length ? (tempRotationIndex = 0) : null;
-    tempRotationIndex < 0
-      ? (tempRotationIndex = this.theTetrominoes[this.number].length - 1)
-      : null;
+    tempRotationIndex < 0 ? (tempRotationIndex = this.theTetrominoes[this.number].length - 1) : null;
     // testing boudaries
     const tempTetromino = this.theTetrominoes[this.number][tempRotationIndex];
     const willTouchLimits = tempTetromino.some((index) => {

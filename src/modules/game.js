@@ -145,6 +145,9 @@ export const game = {
       setTimeout(() => {
         playground.deletingAnimation = 'done';
       }, init.deletionAnimationSpeed);
+      setTimeout(() => {
+        sounds.play(sounds.land);
+      }, init.deletionAnimationSpeed * 1.5);
       return;
     }
     if (tetrominoTouchDown) {
@@ -155,6 +158,7 @@ export const game = {
       const lose = this.loseCondition();
       if (lose) {
         sounds.stop(sounds.playingTheme);
+        sounds.play(sounds.gameover);
         this.stop();
         this.gameStatut = 'lost';
         console.log('GAME LOST');
