@@ -23,6 +23,7 @@ export const game = {
     this.restore();
     playground.removeAllGrid();
     document.getElementById('startButton').innerHTML = 'Start';
+    document.getElementById('startButton').classList.add('buttonPulse');
     inputs.setListener(false);
     sounds.stop(sounds.theme1);
   },
@@ -48,14 +49,15 @@ export const game = {
       console.log('new game is starting');
       sounds.playSong(sounds.playingTheme);
       tetromino.drawNew();
+      document.getElementById('startButton').classList.remove('buttonPulse');
     }
     if (this.gameStatut === 'pause' || this.gameStatut === 'notStarted') {
       sounds.playSong(sounds.playingTheme);
-
       this.timerId = setInterval(this.run.bind(this), init.speedArray[this.speed - 1]);
       console.log('game mode', this.gameMode);
       init.gameMode[this.gameMode].start();
       document.getElementById('startButton').innerHTML = 'Pause';
+      document.getElementById('startButton').classList.remove('buttonPulse');
       display.pause(false);
       this.gameStatut = 'play';
     } else {
@@ -70,6 +72,7 @@ export const game = {
     display.pause(true);
     init.gameMode[this.gameMode].pause();
     document.getElementById('startButton').innerHTML = 'Resume';
+    document.getElementById('startButton').classList.add('buttonPulse');
     clearInterval(this.timerId);
   },
   reset() {
@@ -81,6 +84,7 @@ export const game = {
     tetromino.initSaved();
     this.gameStatut = 'notStarted';
     document.getElementById('startButton').innerHTML = 'Start';
+    document.getElementById('startButton').classList.add('buttonPulse');
     console.log('game have been reseted');
   },
   backMenu() {

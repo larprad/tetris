@@ -114,11 +114,25 @@ export const playground = {
     return lineToDelete;
   },
   animateDeleteLine(lineToDelete) {
-    lineToDelete.length === 4 ? sounds.play(sounds.tetris) : sounds.play(sounds.line);
-    for (let i = 0; i < init.columns; i++) {
-      lineToDelete.forEach(
-        (index) => (this.blocks[init.columns * index + i].className = 'playgroundBlock taken erasing')
-      );
+    if (lineToDelete.length === 4) {
+      sounds.play(sounds.tetris);
+      document.body.classList.add('specialErasing');
+      setTimeout(() => document.body.classList.remove('specialErasing'), 1000);
+      for (let i = 0; i < init.columns; i++) {
+        lineToDelete.forEach(
+          (index) =>
+            (this.blocks[init.columns * index + i].className =
+              'playgroundBlock taken specialErasing')
+        );
+      }
+    } else {
+      sounds.play(sounds.line);
+      for (let i = 0; i < init.columns; i++) {
+        lineToDelete.forEach(
+          (index) =>
+            (this.blocks[init.columns * index + i].className = 'playgroundBlock taken erasing')
+        );
+      }
     }
   },
   deleteLine(lineArray) {
