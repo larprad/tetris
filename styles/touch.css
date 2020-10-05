@@ -12,7 +12,7 @@
 }
 
 .controlBlock {
-  padding: 1em;
+  padding: 8px;
   display: grid;
   height: 180px;
   width: 180px;
@@ -54,6 +54,7 @@
   border: none;
   border-radius: 0.5em;
   font-size: 2em;
+  color: #444;
 }
 
 .controlUp {

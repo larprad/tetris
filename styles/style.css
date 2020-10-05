@@ -17,10 +17,8 @@ body {
   /* height: 80vh; */
   /* background-color: black; */
   /* background: url('https://cutewallpaper.org/21/space-1080/Download-wallpaper-1920x1080-stars,-space,-galaxy-full-hd-.jpg'); */
-  background: rgb(172, 123, 145);
-  background: radial-gradient(circle, rgba(172, 123, 145, 1) 0%, rgba(21, 26, 33, 1) 100%);
-  background-repeat: repeat;
-  background-size: cover;
+  background-color: #003063;
+  background-image: url('https://www.transparenttextures.com/patterns/grid-me.png');
   color: white;
   font-family: sans-serif;
   display: flex;
@@ -30,6 +28,7 @@ body {
   user-select: none;
   -webkit-touch-callout: none;
   overflow: hidden;
+  min-width: 300px;
 }
 
 h1 {
@@ -81,12 +80,16 @@ button:active {
 }
 
 .titleImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 2em;
+  max-width: 1000px;
 }
 
 .titleImage img {
   object-fit: contain;
-  height: 4em;
+  width: 50%;
 }
 
 #endGame {
@@ -106,6 +109,9 @@ button:active {
   justify-content: center;
   padding: 1em;
   background-color: blueviolet;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  border-top: 3px solid white;
+  border-bottom: 3px solid white;
   width: 100%;
 }
 

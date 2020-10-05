@@ -4,8 +4,9 @@
   align-items: center;
 
   padding: 0.8em;
-  border: 1px solid gray;
+  border-radius: 10px;
   background-color: rgb(20, 20, 20);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   flex-direction: column;
 }
 
@@ -65,31 +66,51 @@
 }
 
 .instructionBox {
-  color: gray;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px dashed rgb(133, 133, 133);
+  border: 1px solid #0d3165;
   margin-top: 1em;
+  /* padding: 5px; */
   width: 100%;
+  border-radius: 5px;
 }
 
 .instructionBox h3 {
+  color: white;
   font-size: 1em;
   padding: 0.4em 0;
   margin: 0;
   margin-bottom: 0.5em;
-  color: White;
   width: 100%;
-  border-bottom: 1px dashed rgb(133, 133, 133);
+  border-bottom: 1px solid #0d3165;
   text-align: center;
 }
 
-.instructionBox p {
+.instructionBoxText {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 0.8em;
-  padding: 0.3em;
-  margin-bottom: 0.2em;
+}
+
+.instructionBox p {
+  padding: 2px;
+  margin-bottom: 4px;
+  width: 50%;
+}
+
+.textRight {
+  text-align: right;
+  color: rgb(170, 170, 170);
+}
+
+.textLeft {
+  text-align: left;
+  color: white;
+  font-weight: bold;
 }
 
 .big {

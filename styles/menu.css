@@ -1,16 +1,40 @@
 .mainMenu {
-  border: 1px solid gray;
-  background-color: rgb(20, 20, 20);
-  width: 100%;
+  background-color: #092347;
+  width: 80%;
   padding: 2em;
   margin-top: 10em;
+  border-radius: 1em;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .gameMode {
-  font-size: 1.5em;
+  position: relative;
+  overflow: hidden;
+  font-size: 2em;
   margin: 0;
-  width: 40%;
   flex-shrink: 0;
+  border-radius: 20px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border: none;
+}
+
+.gameMode::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -50%;
+  height: 100%;
+  width: 100%;
+  transform: rotate(30deg);
+  background-color: coral;
+  transition: all 0.11s ease-in-out;
+}
+
+.gameMode:hover::before {
+  left: -40%;
+  height: 200%;
 }
 
 .menuButtonContainer {
@@ -18,6 +42,7 @@
   width: 100%;
   display: flex;
   align-content: stretch;
+  flex-direction: column;
   justify-content: space-between;
   flex-shrink: 0;
 }
@@ -25,8 +50,10 @@
 .menuButtonDescription {
   flex-grow: 1;
   display: flex;
+  padding: 0.8em;
   justify-content: center;
   align-items: center;
-  background-color: black;
+  background-color: #444;
   flex-shrink: 0;
+  text-align: center;
 }

@@ -24,12 +24,12 @@
 
         <div class="menuButtonContainer">
           <button id="sprintMode" class="gameMode">Sprint</button>
-          <div class="menuButtonDescription"><p>Make 20 lines Quickly!</p></div>
+          <div class="menuButtonDescription"><p>Make 20 lines... Quickly!</p></div>
         </div>
 
-        <div class="menuButtonContainer">
+        <!-- <div class="menuButtonContainer">
           <button class="gameMode" disabled>Leaderboard</button>
-        </div>
+        </div> -->
       </div>
       <div id="sidePanelLeft" class="sidePanel spLeft hide">
         <div class="sidePanelContainer">
@@ -45,47 +45,61 @@
           <h4 id="timerTitle" class="littleBoxTitle">TIMER</h4>
           <div class="instructionBox">
             <h3>Controls</h3>
-            <p>Move block</p>
-            <p>⇦ ⇩ ⇨</p>
-            <p>Rotate Left</p>
-            <p>A</p>
-            <p>Rotate Right</p>
-            <p>Z</p>
-            <p>Save block</p>
-            <p>E</p>
+            <div class="instructionBoxText">
+              <p class="textRight">Move</p>
+              <p class="textleft">🡄 🡇 🡆</p>
+            </div>
+            <div class="instructionBoxText">
+              <p class="textRight">Smash</p>
+              <p class="textleft">🡅</p>
+            </div>
+            <div class="instructionBoxText">
+              <p class="textRight">↶</p>
+              <p class="textleft">A</p>
+            </div>
+            <div class="instructionBoxText">
+              <p class="textRight">↷</p>
+              <p class="textleft">Z</p>
+            </div>
+            <div class="instructionBoxText">
+              <p class="textRight">Save</p>
+              <p class="textleft">E</p>
+            </div>
           </div>
           <div id="touchControlContainer">
             <div class="controlBlock controlContainerLeft">
               <div class="controlUp controlArrowContainer">
-                <button id="controlUp" class="controlButton">⥥</button>
+                <button id="controlUp" class="controlButton">⯯</button>
               </div>
               <div class="controlLeft controlArrowContainer">
-                <button id="controlLeft" class="controlButton">⇦</button>
+                <button id="controlLeft" class="controlButton">🡄</button>
               </div>
               <div class="controlMiddle controlArrowContainer">
                 <div class="controlButton"></div>
               </div>
               <div class="controlRight controlArrowContainer">
-                <button id="controlRight" class="controlButton">⇨</button>
+                <button id="controlRight" class="controlButton">🡆</button>
               </div>
               <div class="controlDown controlArrowContainer">
-                <button id="controlDown" class="controlButton">⇩</button>
+                <button id="controlDown" class="controlButton">🡇</button>
               </div>
             </div>
             <div class="controlBlock controlContainerRight">
               <div class="controlRotLeft controlButtonContainer">
-                <button id="controlRotLeft" class="controlButton round">↶</button>
+                <button id="controlRotLeft" class="controlButton round">⭯</button>
               </div>
               <div class="controlRotRight controlButtonContainer">
-                <button id="controlRotRight" class="controlButton round">↷</button>
+                <button id="controlRotRight" class="controlButton round">⭮</button>
               </div>
               <div class="controlSave controlButtonContainer">
-                <button id="controlSave" class="controlButton round">S</button>
+                <button id="controlSave" class="controlButton round">s</button>
               </div>
             </div>
           </div>
         </div>
-        <div class="sidePanelContainer"><button id="backMenu">⇦ Menu</button></div>
+        <div class="sidePanelContainer">
+          <button id="backMenu" class="playgroundButton">🡄 Menu</button>
+        </div>
       </div>
       <div id="playgroundContainer" class="playgroundContainer hide">
         <div id="gamePaused"><h2>GAME PAUSED</h2></div>
@@ -112,7 +126,8 @@
         </div>
 
         <div class="sidePanelContainer">
-          <button id="startButton">Start</button> <button id="resetButton">Reset</button>
+          <button id="startButton" class="playgroundButton buttonPulse">Start</button>
+          <button id="resetButton" class="playgroundButton">Reset</button>
         </div>
       </div>
     </div>
