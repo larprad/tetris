@@ -116,8 +116,6 @@ export const playground = {
   animateDeleteLine(lineToDelete) {
     if (lineToDelete.length === 4) {
       sounds.play(sounds.tetris);
-      document.body.classList.add('specialErasing');
-      setTimeout(() => document.body.classList.remove('specialErasing'), 1000);
       for (let i = 0; i < init.columns; i++) {
         lineToDelete.forEach(
           (index) =>

@@ -105,6 +105,7 @@ export const game = {
         tetromino.undraw();
         tetromino.drawNew();
       }
+      sounds.play(sounds.save);
     } else {
       console.log('already saved one tetromino wait for next');
     }
@@ -117,16 +118,15 @@ export const game = {
   },
   increaseSpeed(value) {
     document.getElementById('speedBox').classList.add('flash');
-    document.getElementById('playground').classList.add('flash');
     setTimeout(() => {
       document.getElementById('speedBox').classList.remove('flash');
-      document.getElementById('playground').classList.remove('flash');
-    }, 500);
+    }, 700);
     console.log('increasing speed');
     clearInterval(this.timerId);
     this.speed += value;
     this.timerId = setInterval(this.run.bind(this), init.speedArray[this.speed - 1]);
     document.getElementById('speed').innerHTML = this.speed;
+    sounds.play(sounds.speedup);
   },
   run() {
     if (playground.deletingAnimation === 'onGoing') {

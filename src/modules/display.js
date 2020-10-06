@@ -2,6 +2,7 @@ import { game } from './game';
 import { timer } from './timer';
 
 export const display = {
+  tactil: false,
   playgroundPanel(bool) {
     if (bool) {
       console.log('showing playground panels');
@@ -19,9 +20,11 @@ export const display = {
     if (bool) {
       console.log('showing main menu');
       document.getElementById('mainMenu').classList.remove('hide');
+      this.touchControl(false);
     } else {
       console.log('hidding main menu');
       document.getElementById('mainMenu').classList.add('hide');
+      this.touchControl(this.tactil);
     }
   },
   sidePanelInfo() {

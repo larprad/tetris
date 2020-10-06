@@ -10,41 +10,44 @@ html {
   --rows: 20;
   --block-width: 30px;
   --border-width: 1px;
+  height: 100%;
+  overflow: hidden;
 }
 
 body {
   position: relative;
-  /* height: 80vh; */
-  /* background-color: black; */
-  /* background: url('https://cutewallpaper.org/21/space-1080/Download-wallpaper-1920x1080-stars,-space,-galaxy-full-hd-.jpg'); */
   background-color: #003063;
-  background-image: url('https://www.transparenttextures.com/patterns/grid-me.png');
+  background-image: url('../img/grid.png');
   color: white;
-  font-family: sans-serif;
+  font-family: 'Orbitron', sans-serif;
   display: flex;
   justify-content: start;
   align-items: center;
   flex-direction: column;
   user-select: none;
-  -webkit-touch-callout: none;
   overflow: hidden;
+  height: 100%;
   min-width: 300px;
 }
 
 h1 {
-  font-size: 3em;
+  font-size: 2.5rem;
   margin: 1em;
 }
 
 h2 {
-  font-size: 2em;
+  font-size: 1.5em;
   padding: 0.25em;
   text-align: center;
 }
 
 h3 {
-  font-size: 1.2em;
+  font-size: 1.1em;
   margin: 1em;
+}
+
+p {
+  font-size: 0.8rem;
 }
 
 button {
@@ -52,9 +55,9 @@ button {
   width: 100%;
   padding: 0.2em 0;
   cursor: pointer;
-  font-size: 1em;
+  font-size: 0.8em;
   outline: 0;
-  outline: none !important;
+  font-family: inherit;
 }
 
 button:focus {
@@ -63,6 +66,37 @@ button:focus {
 
 button:active {
   outline: 0;
+}
+
+#musicBox {
+  position: absolute;
+  padding: 10px;
+  top: 0px;
+  right: 0px;
+  width: 70px;
+  height: 70px;
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+  background-color: #efefef;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+#musicBoxContainer {
+  transform: rotate(45deg);
+  margin-top: 0px;
+  padding-bottom: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#musicSwitch {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
 }
 
 .hide {
@@ -77,6 +111,7 @@ button:active {
   top: 50%;
   transform: translateY(-50%);
   background-color: gray;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .titleImage {
@@ -90,6 +125,8 @@ button:active {
 .titleImage img {
   object-fit: contain;
   width: 50%;
+  -webkit-filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
+  filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
 }
 
 #endGame {
@@ -108,11 +145,12 @@ button:active {
   align-items: center;
   justify-content: center;
   padding: 1em;
-  background-color: blueviolet;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  background-color: coral;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(153, 153, 153, 0.23);
   border-top: 3px solid white;
   border-bottom: 3px solid white;
   width: 100%;
+  text-align: center;
 }
 
 #finalScore {
@@ -133,7 +171,26 @@ button:active {
 
 .flash {
   background-color: red;
-  border: 3px solid red;
+}
+
+footer {
+  -webkit-box-shadow: 3px -5px 29px -4px rgba(0, 0, 0, 0.54);
+  -moz-box-shadow: 3px -5px 29px -4px rgba(0, 0, 0, 0.54);
+  box-shadow: 3px -5px 29px -4px rgba(0, 0, 0, 0.54);
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  padding: 1em;
+  background-color: #0f2348;
+  text-align: center;
+}
+
+footer p {
+  opacity: 0.5;
+}
+
+footer a {
+  color: antiquewhite;
 }
 
 @media screen and (max-device-width: 640px) {

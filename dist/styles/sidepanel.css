@@ -30,8 +30,12 @@
   position: relative;
   width: calc(4 * var(--block-width));
   height: calc(4 * var(--block-width));
-  border: 3px solid white;
-  background-color: black;
+  /* border: 3px solid white; */
+  border-radius: 5px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  background-color: #003063;
+  background-image: url('../img/tile.png');
   display: flex;
   justify-content: center;
   align-items: center;
@@ -72,7 +76,6 @@
   align-items: center;
   border: 1px solid #0d3165;
   margin-top: 1em;
-  /* padding: 5px; */
   width: 100%;
   border-radius: 5px;
 }
@@ -100,6 +103,7 @@
   padding: 2px;
   margin-bottom: 4px;
   width: 50%;
+  font-size: 0.6rem;
 }
 
 .textRight {

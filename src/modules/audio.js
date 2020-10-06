@@ -9,15 +9,20 @@ export let sounds = {
   line: new Audio('./sound/samples/line.mp3'),
   tetris: new Audio('./sound/samples/tetris.mp3'),
   gameover: new Audio('./sound/samples/gameover.mp3'),
+  speedup: new Audio('./sound/samples/speedup.mp3'),
+  save: new Audio('./sound/samples/save.mp3'),
   justSmashed: false,
   playingTheme: 0,
+  musicEnabled: true,
   toggleSmash() {
     this.justSmashed = !this.justSmashed;
   },
   playSong(theme) {
-    theme.play();
-    theme.loop = true;
-    theme.volume = 0.5;
+    if (this.musicEnabled) {
+      theme.play();
+      theme.loop = true;
+      theme.volume = 0.5;
+    }
   },
   play(theme) {
     this.stop(theme);
@@ -29,5 +34,8 @@ export let sounds = {
   },
   pause(theme) {
     theme.pause();
+  },
+  enableMusic(bool) {
+    bool ? (this.musicEnabled = true) : (this.musicEnabled = false);
   },
 };

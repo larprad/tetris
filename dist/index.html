@@ -4,11 +4,21 @@
     <meta charset="UTF-8" />
     <script src="./main.js" defer></script>
     <link rel="stylesheet" href="./styles/style.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no" />
     <link rel="icon" href="favico.ico" type="image/x-icon" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <title>Tetris</title>
   </head>
   <body>
+    <div id="musicBox">
+      <div id="musicBoxContainer">
+        <label id="labelSwitch" for="music">🎵</label>
+        <input type="checkbox" name="music" id="musicSwitch" checked />
+      </div>
+    </div>
     <div class="titleImage"><img src="./img/logo2.png" alt="tetris_logo" /></div>
     <!-- <h1>TETRIS</h1> -->
     <div class="mainContainer">
@@ -66,39 +76,9 @@
               <p class="textleft">E</p>
             </div>
           </div>
-          <div id="touchControlContainer">
-            <div class="controlBlock controlContainerLeft">
-              <div class="controlUp controlArrowContainer">
-                <button id="controlUp" class="controlButton">⯯</button>
-              </div>
-              <div class="controlLeft controlArrowContainer">
-                <button id="controlLeft" class="controlButton">🡄</button>
-              </div>
-              <div class="controlMiddle controlArrowContainer">
-                <div class="controlButton"></div>
-              </div>
-              <div class="controlRight controlArrowContainer">
-                <button id="controlRight" class="controlButton">🡆</button>
-              </div>
-              <div class="controlDown controlArrowContainer">
-                <button id="controlDown" class="controlButton">🡇</button>
-              </div>
-            </div>
-            <div class="controlBlock controlContainerRight">
-              <div class="controlRotLeft controlButtonContainer">
-                <button id="controlRotLeft" class="controlButton round">⭯</button>
-              </div>
-              <div class="controlRotRight controlButtonContainer">
-                <button id="controlRotRight" class="controlButton round">⭮</button>
-              </div>
-              <div class="controlSave controlButtonContainer">
-                <button id="controlSave" class="controlButton round">s</button>
-              </div>
-            </div>
-          </div>
         </div>
         <div class="sidePanelContainer">
-          <button id="backMenu" class="playgroundButton">🡄 Menu</button>
+          <button id="backMenu" class="playgroundButton">Menu</button>
         </div>
       </div>
       <div id="playgroundContainer" class="playgroundContainer hide">
@@ -131,5 +111,41 @@
         </div>
       </div>
     </div>
+    <div id="touchControlContainer">
+      <div class="controlBlock controlContainerLeft">
+        <div class="controlUp controlArrowContainer">
+          <button id="controlUp" class="controlButton"></button>
+        </div>
+        <div class="controlLeft controlArrowContainer">
+          <button id="controlLeft" class="controlButton"></button>
+        </div>
+        <div class="controlMiddle controlArrowContainer">
+          <div class="controlButton"></div>
+        </div>
+        <div class="controlRight controlArrowContainer">
+          <button id="controlRight" class="controlButton"></button>
+        </div>
+        <div class="controlDown controlArrowContainer">
+          <button id="controlDown" class="controlButton"></button>
+        </div>
+      </div>
+      <div class="controlBlock controlContainerRight">
+        <div class="controlRotLeft controlButtonContainer">
+          <button id="controlRotLeft" class="controlButton"></button>
+        </div>
+        <div class="controlRotRight controlButtonContainer">
+          <button id="controlRotRight" class="controlButton"></button>
+        </div>
+        <div class="controlSave controlButtonContainer">
+          <button id="controlSave" class="controlButton"></button>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <p>
+        A game by Nintendo ® - Developed by
+        <a href="https://github.com/larprad" target="blank">Larprad</a>
+      </p>
+    </footer>
   </body>
 </html>
