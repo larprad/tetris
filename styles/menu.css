@@ -24,17 +24,16 @@
   display: block;
   position: absolute;
   top: 0;
-  left: -50%;
-  height: 100%;
-  width: 100%;
-  transform: rotate(30deg);
+  left: -30%;
+  height: 300%;
+  width: 50%;
+  transform: rotate(45deg);
   background-color: coral;
   transition: all 0.11s ease-in-out;
 }
 
 .gameMode:hover::before {
-  left: -40%;
-  height: 200%;
+  left: -10%;
 }
 
 .menuButtonContainer {

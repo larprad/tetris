@@ -13,7 +13,6 @@
   margin: 0.8em;
   width: calc(var(--columns) * var(--block-width));
   height: calc(var(--rows) * var(--block-width));
-  border: 3px solid white;
   display: flex;
   flex-wrap: wrap;
   box-sizing: content-box;
@@ -25,7 +24,7 @@
 .playgroundBlock {
   width: var(--block-width);
   height: var(--block-width);
-  border: var(--border-width) solid rgba(128, 128, 128, 0.5);
+  border: var(--border-width) solid rgba(128, 128, 128, 0.3);
   background-color: rgb(255, 255, 255);
   color: antiquewhite;
   display: flex;
@@ -47,6 +46,7 @@
   border-radius: 5px;
   border: 2px solid rgba(255, 255, 255, 0.212);
   transition: all ease-in-out 0.2s;
+  padding: 0.5em 0;
 }
 
 .playgroundButton:hover {
