@@ -4,6 +4,11 @@ The world famous Tetris game with pure JS, HTML &amp; CSS
 
 https://larprad.github.io/tetris/
 
+## Context
+
+I created this game alone during the end of 2020 summer to challenge myself by using only vanilla javascript for a project involving a lot of DOM manipulations.
+This project is functionnal and on hold before further updates (next major update: persitent scoreboard).
+
 ## Presentation
 
 The game is playable on smartphones and desktop3 game modes are available:
