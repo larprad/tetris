@@ -1,8 +1,8 @@
 # Tetris
 
-The world famous Tetris game with pure JS, HTML &amp; CSS
+The world famous Tetris game with pure JS, HTML &amp; CSS.
 
-https://larprad.github.io/tetris/
+🕹️ https://larprad.github.io/tetris/
 
 ## Context
 
