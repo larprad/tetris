@@ -11,7 +11,7 @@ This project is functionnal and on hold before further updates (next major updat
 
 ## Presentation
 
-The game is playable on smartphones and desktop3 game modes are available:
+The game is playable on smartphones and desktop. 3 game modes are available:
 
 * Enduro: No time limit, it's about getting the best score as the speed increases every 10 rows. Suitable for beginners. 
 
