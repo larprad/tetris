@@ -14,6 +14,9 @@ The game is playable on smartphones and desktop3 game modes are available:
 
 * Sprint: Against the clock where you have to do 20 lines as quickly as possible. The starting speed is quite high and increases every 5 lines. For experienced player.
 
+![tetris1](https://user-images.githubusercontent.com/59915248/95334832-e38e0800-08ae-11eb-8db9-b33ff71e2c79.png)
+![tetris2](https://user-images.githubusercontent.com/59915248/95334837-e5f06200-08ae-11eb-844c-ac323d8c0773.png)
+
 ## Architecture
 
 The game code is organized through different objects which will bring together the methods and variables necessary for the proper functioning of the whole. Main objects:
